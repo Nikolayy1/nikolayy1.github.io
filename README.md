@@ -1,4 +1,4 @@
-# CCL3 Project - TITLE
+# CCL3 Project - Daily Quest
 _by Niklas Hofstetter and Iosif Cicio_
 <br>
 ## Description
