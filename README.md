@@ -2,13 +2,39 @@
 _by Niklas Hofstetter and Iosif Cicio_
 <br>
 ## Description
-No one enjoys doing chores, but they're a part of everyday life. That's why we're creating an app designed to make them more engaging and fun! Our app transforms boring household tasks into an interactive experience. It not only helps you stay organized by tracking your to-do list but also motivates you with a rewarding XP system. Earn experience points for every chore you complete, level up, and celebrate your progress.
+Daily Quest is a gamified task management app that transforms your daily responsibilities into an epic adventure. With features like a leveling system and a Quick Board for top-priority tasks, it keeps users motivated and productive. Inspired by RPG mechanics, Daily Quest allows users to focus on their goals while earning rewards for their accomplishments.
 <br>
 ## App Concept
 ### Use Case
-Our app's primary use case is tracking household chores - keeping tabs on what's completed and what still needs attention. By integrating gamification through an XP system and rewards, the app encourages users to stay engaged and motivated. Users will feel a sense of accomplishment as they complete tasks and make progress in their Level. 
+Daily Quest is designed for individuals who want to stay productive while having fun. It provides a visual and interactive way to manage tasks by incorporating gamification elements like experience points, levels, and a task prioritization system. 
+Users can:
+-	Mark tasks as "Quick Board" for focused attention.
+-	Earn XP and level up by completing tasks.
+-	Allocate stat points (Endurance, Intelligence, Focus) as you progress.
+This app helps users maintain productivity by creating a rewarding and enjoyable experience.
 <br>
+
 ### Target User
+Demographics: <br>
+- Age Group: 15–35 years old.
+- Tech-Savvy: Familiar with mobile apps and gaming concepts.
+<br>
+
+Motivations: <br>
+- Stay organized and productive.
+- Enjoy a gamified experience for task management.
+<br>
+
+Interests:<br>
+- RPG games, personal growth, and productivity hacks.
+<br>
+
+Paint points:<br>
+- Finds traditional to-do lists uninspiring.
+- Struggles to stay motivated with mundane task management apps.
+<br>
+
+Possible User Groups:<br>
 - Young Adults & College Students:
   - Struggling to balance studies, work, and maintaining a tidy living space.
   - Seeking motivation and structure to keep up with chores.
