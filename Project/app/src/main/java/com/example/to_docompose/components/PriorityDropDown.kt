@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.example.to_docompose.R
 import com.example.to_docompose.data.models.Priority
+import com.example.to_docompose.ui.theme.Custom_beige
+import com.example.to_docompose.ui.theme.Custom_dark_blue
 import com.example.to_docompose.ui.theme.PRIORITY_DROP_DOWN_HEIGHT
 import com.example.to_docompose.ui.theme.PRIORITY_INDICATOR_SIZE
 
@@ -49,12 +51,12 @@ fun PriorityDropDown(
             .onGloballyPositioned {
                 parentSize = it.size
             }
-            .background(MaterialTheme.colorScheme.background)
+            .background(Custom_beige)
             .height(PRIORITY_DROP_DOWN_HEIGHT)
             .clickable { expanded = true }
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.onSurface.copy(
+                color = Custom_dark_blue.copy(
                     alpha = 0.38f
                 ),
                 shape = MaterialTheme.shapes.small

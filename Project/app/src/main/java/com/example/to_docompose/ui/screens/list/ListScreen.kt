@@ -2,6 +2,8 @@ package com.example.to_docompose.ui.screens.list
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -16,6 +18,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.to_docompose.R
+import com.example.to_docompose.ui.theme.Custom_beige
+import com.example.to_docompose.ui.theme.Custom_orange
+import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 import com.example.to_docompose.util.Action
 import com.example.to_docompose.util.SearchAppBarState
@@ -52,6 +57,7 @@ fun ListScreen(
     )
 
     Scaffold(
+        modifier = Modifier.background(Custom_beige),
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
         topBar = {
             ListAppBar(
@@ -91,7 +97,9 @@ fun ListFab(
     onFabClicked: (taskId: Int) -> Unit
 ) {
     FloatingActionButton(
-        onClick = { onFabClicked(-1) }
+        onClick = { onFabClicked(-1) },
+        containerColor = Custom_orange,
+        contentColor = Custom_white
     ) {
         Icon(
             imageVector = Icons.Filled.Add,

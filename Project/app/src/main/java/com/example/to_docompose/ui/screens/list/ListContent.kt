@@ -4,6 +4,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,6 +34,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -44,6 +46,10 @@ import androidx.compose.ui.unit.dp
 import com.example.to_docompose.R
 import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.data.models.ToDoTask
+import com.example.to_docompose.ui.theme.Custom_beige
+import com.example.to_docompose.ui.theme.Custom_dark_blue
+import com.example.to_docompose.ui.theme.Custom_light_blue
+import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.theme.HighPriorityColor
 import com.example.to_docompose.ui.theme.LARGEST_PADDING
 import com.example.to_docompose.ui.theme.LARGE_PADDING
@@ -215,7 +221,7 @@ fun RedBackground(degrees: Float) {
             modifier = Modifier.rotate(degrees = degrees),
             imageVector = Icons.Filled.Delete,
             contentDescription = stringResource(id = R.string.delete_icon),
-            tint = Color.White
+            tint = Custom_white
         )
     }
 }
@@ -229,15 +235,15 @@ fun TaskItem(
         modifier = Modifier
             .fillMaxWidth(),
         shape = RectangleShape,
-        shadowElevation = TASK_ITEM_ELEVATION,
         onClick = {
             navigateToTaskScreen(toDoTask.id)
-        }
+        },
+        color = Custom_beige
     ) {
         Column(
             modifier = Modifier
                 .padding(all = LARGE_PADDING)
-                .fillMaxWidth()
+                .fillMaxWidth(),
         ) {
             Row {
                 Text(
@@ -245,7 +251,8 @@ fun TaskItem(
                     text = toDoTask.title,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    maxLines = 1
+                    maxLines = 1,
+                    color = Custom_dark_blue
                 )
                 Box(
                     modifier = Modifier
@@ -268,9 +275,15 @@ fun TaskItem(
                 text = toDoTask.description,
                 style = MaterialTheme.typography.bodyMedium,
                 maxLines = 2,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                color = Custom_dark_blue
             )
         }
+        Box(
+            modifier = Modifier.fillMaxWidth()
+                .height(1.dp)
+                .background(Custom_light_blue)
+        )
     }
 }
 

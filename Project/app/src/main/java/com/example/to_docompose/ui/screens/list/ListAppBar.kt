@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.DropdownMenu
@@ -37,6 +39,8 @@ import com.example.to_docompose.R
 import com.example.to_docompose.components.DisplayAlertDialog
 import com.example.to_docompose.components.PriorityItem
 import com.example.to_docompose.data.models.Priority
+import com.example.to_docompose.ui.theme.Custom_dark_blue
+import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.theme.LARGE_PADDING
 import com.example.to_docompose.ui.theme.TOP_APP_BAR_HEIGHT
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
@@ -60,6 +64,9 @@ fun ListAppBar(
                 onSortClicked = { sharedViewModel.persistSortState(it) },
                 onDeleteAllConfirmed = {
                     sharedViewModel.updateAction(newAction = Action.DELETE_ALL)
+                },
+                onBackClicked = {
+
                 }
             )
         }
@@ -89,14 +96,24 @@ fun ListAppBar(
 fun DefaultListAppBar(
     onSearchClicked: () -> Unit,
     onSortClicked: (Priority) -> Unit,
-    onDeleteAllConfirmed: () -> Unit
+    onDeleteAllConfirmed: () -> Unit,
+    onBackClicked: () -> Unit
 ) {
     TopAppBar(
         title = {
             Text(
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = Custom_white,
                 text = stringResource(id = R.string.list_screen_title)
             )
+        },
+        navigationIcon = {
+            IconButton(onClick = { onBackClicked() }) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack, // You can use any appropriate icon
+                    contentDescription = "Back Button", //stringResource(id = R.string.back_button),
+                    tint = Custom_white
+                )
+            }
         },
         actions = {
             ListAppBarActions(
@@ -106,7 +123,7 @@ fun DefaultListAppBar(
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary
+            containerColor = Custom_dark_blue
         )
     )
 }
@@ -142,7 +159,7 @@ fun SearchAction(
         Icon(
             imageVector = Icons.Filled.Search,
             contentDescription = stringResource(id = R.string.search_action),
-            tint = MaterialTheme.colorScheme.onPrimary
+            tint = Custom_white
         )
     }
 }
@@ -159,7 +176,7 @@ fun SortAction(
         Icon(
             painter = painterResource(id = R.drawable.ic_filter_list),
             contentDescription = stringResource(id = R.string.sort_action),
-            tint = MaterialTheme.colorScheme.onPrimary
+            tint = Custom_white
         )
         DropdownMenu(
             expanded = expanded,
@@ -294,7 +311,8 @@ private fun DefaultListAppBarPreview() {
     DefaultListAppBar(
         onSearchClicked = {},
         onSortClicked = {},
-        onDeleteAllConfirmed = {}
+        onDeleteAllConfirmed = {},
+        onBackClicked = {}
     )
 }
 

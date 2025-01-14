@@ -24,6 +24,8 @@ import com.example.to_docompose.R
 import com.example.to_docompose.components.DisplayAlertDialog
 import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.data.models.ToDoTask
+import com.example.to_docompose.ui.theme.Custom_dark_blue
+import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.util.Action
 
 @Composable
@@ -52,12 +54,12 @@ fun NewTaskAppBar(
         },
         title = {
             Text(
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = Custom_white,
                 text = stringResource(id = R.string.add_task)
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary
+            containerColor = Custom_dark_blue
         ),
         actions = {
             AddAction(onAddClicked = navigateToListScreen)
@@ -73,7 +75,7 @@ fun BackAction(
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = stringResource(id = R.string.back_arrow),
-            tint = MaterialTheme.colorScheme.onPrimary
+            tint = Custom_white
         )
     }
 }
@@ -86,7 +88,7 @@ fun AddAction(
         Icon(
             imageVector = Icons.Filled.Check,
             contentDescription = stringResource(id = R.string.add_task),
-            tint = MaterialTheme.colorScheme.onPrimary
+            tint = Custom_white
         )
     }
 }
@@ -103,14 +105,14 @@ fun ExistingTaskAppBar(
         },
         title = {
             Text(
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = Custom_white,
                 text = selectedTask.title,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary
+            containerColor = Custom_dark_blue
         ),
         actions = {
             ExistingTaskAppBarActions(
@@ -129,7 +131,7 @@ fun CloseAction(
         Icon(
             imageVector = Icons.Filled.Close,
             contentDescription = stringResource(id = R.string.close_icon),
-            tint = MaterialTheme.colorScheme.onPrimary
+            tint = Custom_white
         )
     }
 }
@@ -167,7 +169,7 @@ fun DeleteAction(
         Icon(
             imageVector = Icons.Filled.Delete,
             contentDescription = stringResource(id = R.string.delete_icon),
-            tint = MaterialTheme.colorScheme.onPrimary
+            tint = Custom_white
         )
     }
 }
@@ -180,7 +182,7 @@ fun UpdateAction(
         Icon(
             imageVector = Icons.Filled.Check,
             contentDescription = stringResource(id = R.string.update_icon),
-            tint = MaterialTheme.colorScheme.onPrimary
+            tint = Custom_white
         )
     }
 }
