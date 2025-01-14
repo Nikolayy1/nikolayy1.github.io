@@ -8,7 +8,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.toRoute
+import androidx.navigation.navArgument
 import com.example.to_docompose.navigation.Screen
 import com.example.to_docompose.ui.screens.list.ListScreen
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
@@ -19,12 +19,16 @@ fun NavGraphBuilder.listComposable(
     navigateToTaskScreen: (taskId: Int) -> Unit,
     sharedViewModel: SharedViewModel
 ) {
-    composable<Screen.List> { navBackStackEntry ->
-        val action = navBackStackEntry.toRoute<Screen.List>().action
+    composable(
+        route = Screen.List.route,
+        arguments = listOf(navArgument("action") { defaultValue = Action.NO_ACTION.name })
+    ) { navBackStackEntry ->
+        val actionString = navBackStackEntry.arguments?.getString("action") ?: Action.NO_ACTION.name
+        val action = Action.valueOf(actionString)
         var myAction by rememberSaveable { mutableStateOf(Action.NO_ACTION) }
 
         LaunchedEffect(key1 = myAction) {
-            if(action != myAction){
+            if (action != myAction) {
                 myAction = action
                 sharedViewModel.updateAction(newAction = action)
             }

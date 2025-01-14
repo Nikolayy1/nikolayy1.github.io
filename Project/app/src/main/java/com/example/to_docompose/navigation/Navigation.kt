@@ -5,8 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.to_docompose.navigation.destinations.listComposable
+import com.example.to_docompose.navigation.destinations.mainComposable
 import com.example.to_docompose.navigation.destinations.taskComposable
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
+import com.example.to_docompose.util.Action
 
 @ExperimentalAnimationApi
 @Composable
@@ -16,22 +18,27 @@ fun SetupNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.List()
+        startDestination = Screen.Main.route
     ) {
+        mainComposable(
+            navigateToListScreen = {
+                navController.navigate(Screen.List.createRoute(Action.NO_ACTION))
+            },
+            sharedViewModel = sharedViewModel
+        )
         listComposable(
             navigateToTaskScreen = { taskId ->
-                navController.navigate(Screen.Task(id = taskId))
+                navController.navigate(Screen.Task.createRoute(taskId))
             },
             sharedViewModel = sharedViewModel
         )
         taskComposable(
             navigateToListScreen = { action ->
-                navController.navigate(Screen.List(action = action)) {
-                    popUpTo(Screen.List()) { inclusive = true }
+                navController.navigate(Screen.List.createRoute(action)) {
+                    popUpTo(Screen.List.route) { inclusive = true }
                 }
             },
             sharedViewModel = sharedViewModel
         )
-        // homeComposable(), create new destination for home screen
     }
 }
