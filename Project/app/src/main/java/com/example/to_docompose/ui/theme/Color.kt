@@ -66,6 +66,10 @@ val md_theme_dark_scrim = Color(0xFF000000)
 
 val seed = Color(0xFF6750A4)
 
+val custom_orange = Color(0xffdda853)
+val custom_beige = Color(0xfffbf5dd)
+val custom_light_blue = Color(0xffa6cdc6)
+val custom_dark_blue = Color(0xff16404d)
 
 val LowPriorityColor = Color(0xFF00C980)
 val MediumPriorityColor = Color(0xFFFFC114)
