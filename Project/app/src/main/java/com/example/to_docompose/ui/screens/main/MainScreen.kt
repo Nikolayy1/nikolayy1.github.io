@@ -11,22 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 
+//MainScreen provides state and actions from sharedViewModel into MainContent.
 @Composable
 fun MainScreen(
     navigateToListScreen: () -> Unit,
     sharedViewModel: SharedViewModel
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        Button(
-            onClick = navigateToListScreen,
-            modifier = Modifier.fillMaxSize(0.5f)
-        ) {
-            Text(text = "Go to Quest List")
-        }
-    }
+    MainContent(
+        navigateToListScreen = navigateToListScreen,
+    )
 }
