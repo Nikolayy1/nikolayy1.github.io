@@ -65,6 +65,14 @@ fun TaskScreen(
                 priority = priority,
                 onPrioritySelected = {
                     sharedViewModel.updatePriority(newPriority = it)
+                },
+                onCompleteTask = {
+                    if (selectedTask != null) {
+                        sharedViewModel.completeTask(selectedTask)
+                        navigateToListScreen(Action.DELETE)
+                    } else {
+                        displayToast(context = context)
+                    }
                 }
             )
         }

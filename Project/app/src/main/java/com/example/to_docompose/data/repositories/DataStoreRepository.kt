@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.to_docompose.data.models.Priority
@@ -27,16 +28,20 @@ class DataStoreRepository @Inject constructor(
 
     private object PreferenceKeys {
         val sortKey = stringPreferencesKey(name = PREFERENCE_KEY)
+        val xpKey = intPreferencesKey(name = "XP_KEY")
+        val levelKey = intPreferencesKey(name = "LEVEL_KEY")
     }
 
     private val dataStore = context.dataStore
 
+    // Persist Sort State
     suspend fun persistSortState(priority: Priority) {
         dataStore.edit { preference ->
             preference[PreferenceKeys.sortKey] = priority.name
         }
     }
 
+    // Read Sort State
     val readSortState: Flow<String> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
@@ -50,16 +55,26 @@ class DataStoreRepository @Inject constructor(
             sortState
         }
 
+    // Persist XP and Level
+    suspend fun saveXPAndLevel(xp: Int, level: Int) {
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.xpKey] = xp
+            preferences[PreferenceKeys.levelKey] = level
+        }
+    }
+
+    // Read XP and Level
+    val readXPAndLevel: Flow<Pair<Int, Int>> = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }
+        .map { preferences ->
+            val xp = preferences[PreferenceKeys.xpKey] ?: 0
+            val level = preferences[PreferenceKeys.levelKey] ?: 1
+            xp to level
+        }
 }
-
-
-
-
-
-
-
-
-
-
-
-

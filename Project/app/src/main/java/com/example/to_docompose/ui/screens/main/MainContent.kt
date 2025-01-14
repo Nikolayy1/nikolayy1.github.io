@@ -20,7 +20,7 @@ import com.example.to_docompose.data.models.ToDoTask
 fun MainContent(
     navigateToListScreen: () -> Unit,
     avatarLevel: Int = 1,
-    xpProgress: Float = 0.5f,
+    xpProgress: Float = 0.0f,
     quickBoardTasks: List<ToDoTask> = emptyList()
 ) {
     Column(
@@ -62,7 +62,7 @@ fun MainContent(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        Button(onClick = navigateToListScreen) { // Use the provided function for navigation
+        Button(onClick = navigateToListScreen) {
             Text(text = "Quest List")
         }
     }

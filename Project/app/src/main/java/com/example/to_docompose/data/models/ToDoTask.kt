@@ -1,5 +1,6 @@
 package com.example.to_docompose.data.models
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.to_docompose.util.Constants.DATABASE_TABLE
@@ -10,5 +11,7 @@ data class ToDoTask(
     val id: Int = 0,
     val title: String,
     val description: String,
-    val priority: Priority
+    val priority: Priority,
+    @ColumnInfo(defaultValue = "0") // Adding default value
+    val isCompleted: Boolean = false
 )

@@ -2,8 +2,9 @@ package com.example.to_docompose.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.to_docompose.data.ToDoDao
 import com.example.to_docompose.data.ToDoDatabase
-import com.example.to_docompose.util.Constants.DATABASE_NAME
+import com.example.to_docompose.data.ToDoDatabase.Companion.MIGRATION_1_2
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,18 +16,22 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
-    @Singleton
     @Provides
-    fun provideDatabase(
-        @ApplicationContext context: Context
-    ) = Room.databaseBuilder(
-        context,
-        ToDoDatabase::class.java,
-        DATABASE_NAME
-    ).build()
-
     @Singleton
-    @Provides
-    fun provideDao(database: ToDoDatabase) = database.toDoDao()
+    fun provideDatabase(@ApplicationContext context: Context): ToDoDatabase {
+        return Room.databaseBuilder(
+            context,
+            ToDoDatabase::class.java,
+            ToDoDatabase.DATABASE_NAME
+        )
+            .addMigrations(ToDoDatabase.MIGRATION_1_2)
+            .fallbackToDestructiveMigration()
+            .build()
+    }
 
+    @Provides
+    @Singleton
+    fun provideToDoDao(database: ToDoDatabase): ToDoDao {
+        return database.toDoDao()
+    }
 }

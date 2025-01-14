@@ -51,4 +51,7 @@ interface ToDoDao {
     """
     )
     fun sortByHighPriority(): Flow<List<ToDoTask>>
+
+    @Query("UPDATE todo_table SET isCompleted = :isCompleted WHERE id = :taskId") //for the task completion
+    suspend fun markTaskAsCompleted(taskId: Int, isCompleted: Boolean)
 }

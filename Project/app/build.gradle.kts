@@ -57,6 +57,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.7.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
     implementation("androidx.activity:activity-compose:1.9.2")
+    implementation("androidx.compose.material3:material3:1.1.0") //added this
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")

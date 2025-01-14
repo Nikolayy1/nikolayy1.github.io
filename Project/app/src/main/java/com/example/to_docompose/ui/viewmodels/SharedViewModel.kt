@@ -30,6 +30,14 @@ class SharedViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
+    // XP and Level Attributes
+    private var currentXP by mutableIntStateOf(0)
+    var currentLevel by mutableIntStateOf(1)
+    var progressBar by mutableStateOf(0f)
+
+    private val xpPerLevel = 10 // XP required for level 1, 20 for level 2, etc.
+    private val maxLevel = 20
+
     var action by mutableStateOf(Action.NO_ACTION)
         private set
 
@@ -62,6 +70,49 @@ class SharedViewModel @Inject constructor(
     init {
         getAllTasks()
         readSortState()
+        loadXPAndLevel()
+    }
+
+    // Load XP and Level from DataStore
+    private fun loadXPAndLevel() {
+        viewModelScope.launch {
+            dataStoreRepository.readXPAndLevel
+                .collect { (xp, level) ->
+                    currentXP = xp
+                    currentLevel = level
+                    updateProgressBar()
+                }
+        }
+    }
+
+    // Save XP and Level to DataStore
+    private fun saveXPAndLevel() {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreRepository.saveXPAndLevel(currentXP, currentLevel)
+        }
+    }
+
+    // Handle Task Completion and XP Gain
+    fun completeTask(task: ToDoTask) {
+        val xpGained = when (task.priority) {
+            Priority.LOW -> 1
+            Priority.MEDIUM -> 5
+            Priority.HIGH -> 10
+            else -> 0
+        }
+
+        currentXP += xpGained
+        while (currentXP >= xpPerLevel * currentLevel && currentLevel < maxLevel) {
+            currentXP -= xpPerLevel * currentLevel
+            currentLevel++
+        }
+        updateProgressBar()
+        saveXPAndLevel()
+    }
+
+    // Update Progress Bar
+    private fun updateProgressBar() {
+        progressBar = currentXP.toFloat() / (xpPerLevel * currentLevel)
     }
 
     fun searchDatabase(searchQuery: String) {
@@ -248,5 +299,4 @@ class SharedViewModel @Inject constructor(
     fun validateFields(): Boolean {
         return title.isNotEmpty() && description.isNotEmpty()
     }
-
 }
