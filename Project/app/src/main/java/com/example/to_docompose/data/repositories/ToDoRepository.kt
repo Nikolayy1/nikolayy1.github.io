@@ -12,6 +12,7 @@ class ToDoRepository @Inject constructor(private val toDoDao: ToDoDao) {
     val getAllTasks: Flow<List<ToDoTask>> = toDoDao.getAllTasks()
     val sortByLowPriority: Flow<List<ToDoTask>> = toDoDao.sortByLowPriority()
     val sortByHighPriority: Flow<List<ToDoTask>> = toDoDao.sortByHighPriority()
+    val getQuickBoardTasks: Flow<List<ToDoTask>> = toDoDao.getQuickBoardTasks()
 
     fun getSelectedTask(taskId: Int): Flow<ToDoTask> {
         return toDoDao.getSelectedTask(taskId = taskId)
@@ -35,6 +36,10 @@ class ToDoRepository @Inject constructor(private val toDoDao: ToDoDao) {
 
     fun searchDatabase(searchQuery: String): Flow<List<ToDoTask>> {
         return toDoDao.searchDatabase(searchQuery = searchQuery)
+    }
+
+    suspend fun markTaskForQuickBoard(taskId: Int, isQuickBoard: Boolean) {
+        toDoDao.markTaskForQuickBoard(taskId, isQuickBoard)
     }
 
 }
