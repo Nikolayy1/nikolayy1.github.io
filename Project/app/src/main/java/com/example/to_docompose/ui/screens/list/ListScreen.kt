@@ -32,7 +32,8 @@ import com.example.to_docompose.util.SearchAppBarState
 fun ListScreen(
     action: Action,
     navigateToTaskScreen: (taskId: Int) -> Unit,
-    sharedViewModel: SharedViewModel
+    sharedViewModel: SharedViewModel,
+    navigateToMainScreen: () -> Unit
 ) {
     LaunchedEffect(key1 = action) {
         sharedViewModel.handleDatabaseActions(action = action)
@@ -64,7 +65,8 @@ fun ListScreen(
             ListAppBar(
                 sharedViewModel = sharedViewModel,
                 searchAppBarState = searchAppBarState,
-                searchTextState = searchTextState
+                searchTextState = searchTextState,
+                navigateToMainScreen = navigateToMainScreen
             )
         },
         content = { padding ->

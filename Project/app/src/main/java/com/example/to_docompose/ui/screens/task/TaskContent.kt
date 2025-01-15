@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -23,7 +24,9 @@ import com.example.to_docompose.ui.theme.Custom_beige
 import com.example.to_docompose.ui.theme.Custom_beige_dark
 import com.example.to_docompose.ui.theme.Custom_dark_blue
 import com.example.to_docompose.ui.theme.Custom_light_blue
+import com.example.to_docompose.ui.theme.Custom_orange
 import com.example.to_docompose.ui.theme.Custom_red
+import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.theme.LARGE_PADDING
 import com.example.to_docompose.ui.theme.MEDIUM_PADDING
 
@@ -60,7 +63,7 @@ fun TaskContent(
         )
         HorizontalDivider(
             modifier = Modifier.height(MEDIUM_PADDING),
-            color = MaterialTheme.colorScheme.background
+            color = Custom_beige
         )
         PriorityDropDown(
             priority = priority,
@@ -81,7 +84,13 @@ fun TaskContent(
         )
         Button(
             modifier = Modifier.align(Alignment.CenterHorizontally),
-            onClick = onCompleteTask
+            onClick = onCompleteTask,
+            colors = ButtonColors(
+                containerColor = Custom_orange,
+                contentColor = Custom_white,
+                disabledContentColor = Custom_white.copy(alpha = 0.4f),
+                disabledContainerColor = Custom_orange.copy(alpha = 0.4f)
+            )
         ) {
             Text(text = "Complete Task")
         }

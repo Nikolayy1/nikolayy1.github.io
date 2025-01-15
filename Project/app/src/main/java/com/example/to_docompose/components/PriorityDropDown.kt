@@ -29,6 +29,8 @@ import com.example.to_docompose.R
 import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.ui.theme.Custom_beige
 import com.example.to_docompose.ui.theme.Custom_dark_blue
+import com.example.to_docompose.ui.theme.Custom_light_blue
+import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.theme.PRIORITY_DROP_DOWN_HEIGHT
 import com.example.to_docompose.ui.theme.PRIORITY_INDICATOR_SIZE
 
@@ -55,10 +57,8 @@ fun PriorityDropDown(
             .height(PRIORITY_DROP_DOWN_HEIGHT)
             .clickable { expanded = true }
             .border(
-                width = 1.dp,
-                color = Custom_dark_blue.copy(
-                    alpha = 0.38f
-                ),
+                width = if (expanded) 2.dp else 1.dp,
+                color = if (expanded) Custom_dark_blue else Custom_light_blue,
                 shape = MaterialTheme.shapes.small
             ),
         verticalAlignment = Alignment.CenterVertically
@@ -92,7 +92,8 @@ fun PriorityDropDown(
         }
         DropdownMenu(
             modifier = Modifier
-                .width(with(LocalDensity.current) { parentSize.width.toDp() }),
+                .width(with(LocalDensity.current) { parentSize.width.toDp() })
+                .background(Custom_beige),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
