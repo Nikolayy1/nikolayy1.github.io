@@ -1,29 +1,28 @@
 package com.example.to_docompose.ui.screens.task
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.to_docompose.R
 import com.example.to_docompose.components.PriorityDropDown
 import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.ui.theme.Custom_beige
-import com.example.to_docompose.ui.theme.Custom_beige_dark
 import com.example.to_docompose.ui.theme.Custom_dark_blue
 import com.example.to_docompose.ui.theme.Custom_light_blue
-import com.example.to_docompose.ui.theme.Custom_red
 import com.example.to_docompose.ui.theme.LARGE_PADDING
 import com.example.to_docompose.ui.theme.MEDIUM_PADDING
 
@@ -36,7 +35,8 @@ fun TaskContent(
     onDescriptionChange: (String) -> Unit,
     priority: Priority,
     onPrioritySelected: (Priority) -> Unit,
-    onCompleteTask: () -> Unit // Callback for the Complete Task button
+    showCompleteButton: Boolean, // New parameter to control button visibility
+    onCompleteTask: () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -79,11 +79,13 @@ fun TaskContent(
                 unfocusedLabelColor = Custom_dark_blue,
             )
         )
-        Button(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            onClick = onCompleteTask
-        ) {
-            Text(text = "Complete Task")
+        if (showCompleteButton) { // Conditionally show the button
+            Button(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                onClick = onCompleteTask
+            ) {
+                Text(text = "Complete Task")
+            }
         }
     }
 }
@@ -92,12 +94,13 @@ fun TaskContent(
 @Preview
 private fun TaskContentPreview() {
     TaskContent(
-        title = "",
+        title = "Sample Task",
         onTitleChange = {},
-        description = "",
+        description = "Sample Description",
         onDescriptionChange = {},
-        priority = Priority.LOW,
+        priority = Priority.MEDIUM,
         onPrioritySelected = {},
+        showCompleteButton = true, // Set to true for preview
         onCompleteTask = {}
     )
 }

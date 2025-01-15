@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,7 +30,7 @@ import com.example.to_docompose.util.Action
 fun TaskAppBar(
     selectedTask: ToDoTask?,
     navigateToListScreen: (Action) -> Unit,
-    onQuickBoardToggle: (ToDoTask) -> Unit // Added parameter for QuickBoard toggle
+    onQuickBoardToggle: (ToDoTask) -> Unit
 ) {
     if (selectedTask == null) {
         NewTaskAppBar(navigateToListScreen = navigateToListScreen)
@@ -37,7 +38,7 @@ fun TaskAppBar(
         ExistingTaskAppBar(
             selectedTask = selectedTask,
             navigateToListScreen = navigateToListScreen,
-            onQuickBoardToggle = onQuickBoardToggle // Pass toggle handler
+            onQuickBoardToggle = onQuickBoardToggle
         )
     }
 }
@@ -55,7 +56,7 @@ fun NewTaskAppBar(
             Row {
                 IconButton(onClick = { navigateToListScreen(Action.NO_ACTION) }) {
                     Icon(
-                        imageVector = Icons.Default.Delete,
+                        imageVector = Icons.Default.Close,
                         contentDescription = stringResource(id = R.string.no_action)
                     )
                 }

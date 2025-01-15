@@ -52,7 +52,7 @@ fun TaskScreen(
                     } else {
                         displayToast(context = context)
                     }
-                } // Added QuickBoard toggle handler
+                }
             )
         },
         content = { padding ->
@@ -73,6 +73,7 @@ fun TaskScreen(
                 onPrioritySelected = {
                     sharedViewModel.updatePriority(newPriority = it)
                 },
+                showCompleteButton = selectedTask != null, // Only show button when viewing a task
                 onCompleteTask = {
                     if (selectedTask != null) {
                         sharedViewModel.completeTask(selectedTask)
