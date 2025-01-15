@@ -28,6 +28,15 @@ interface ToDoDao {
     @Query("SELECT * FROM todo_table WHERE title LIKE :searchQuery OR description LIKE :searchQuery")
     fun searchDatabase(searchQuery: String): Flow<List<ToDoTask>>
 
+
+    //QuickBoardStuff
+    @Query("SELECT * FROM todo_table WHERE isQuickBoard = 1")
+    fun getQuickBoardTasks(): Flow<List<ToDoTask>>
+
+    @Query("UPDATE todo_table SET isQuickBoard = :isQuickBoard WHERE id = :taskId")
+    suspend fun markTaskForQuickBoard(taskId: Int, isQuickBoard: Boolean)
+
+
     @Query(
         """
         SELECT * FROM todo_table ORDER BY
@@ -51,4 +60,7 @@ interface ToDoDao {
     """
     )
     fun sortByHighPriority(): Flow<List<ToDoTask>>
+
+    @Query("UPDATE todo_table SET isCompleted = :isCompleted WHERE id = :taskId") //for the task completion
+    suspend fun markTaskAsCompleted(taskId: Int, isCompleted: Boolean)
 }

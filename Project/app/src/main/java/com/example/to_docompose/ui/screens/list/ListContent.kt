@@ -159,7 +159,7 @@ fun DisplayTasks(
             val dismissState = rememberSwipeToDismissBoxState()
             val dismissDirection = dismissState.dismissDirection
             val isDismissed = dismissState.dismissDirection == SwipeToDismissBoxValue.EndToStart
-                && dismissState.progress == 1f
+                    && dismissState.progress == 1f
             if (isDismissed && dismissDirection == SwipeToDismissBoxValue.EndToStart) {
                 val scope = rememberCoroutineScope()
                 SideEffect {
@@ -193,16 +193,16 @@ fun DisplayTasks(
 //                    )
 //                )
 //            ) {
-                SwipeToDismissBox(
-                    state = dismissState,
+            SwipeToDismissBox(
+                state = dismissState,
 //                    dismissThresholds = { FractionalThreshold(fraction = 0.2f) },
-                    backgroundContent = { RedBackground(degrees = degrees) }
-                ) {
-                    TaskItem(
-                        toDoTask = task,
-                        navigateToTaskScreen = navigateToTaskScreen
-                    )
-                }
+                backgroundContent = { RedBackground(degrees = degrees) }
+            ) {
+                TaskItem(
+                    toDoTask = task,
+                    navigateToTaskScreen = navigateToTaskScreen
+                )
+            }
 //            }
         }
     }

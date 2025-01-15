@@ -3,6 +3,7 @@ package com.example.to_docompose.ui.screens.task
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -10,6 +11,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -33,7 +35,8 @@ fun TaskContent(
     description: String,
     onDescriptionChange: (String) -> Unit,
     priority: Priority,
-    onPrioritySelected: (Priority) -> Unit
+    onPrioritySelected: (Priority) -> Unit,
+    onCompleteTask: () -> Unit // Callback for the Complete Task button
 ) {
     Column(
         modifier = modifier
@@ -64,7 +67,7 @@ fun TaskContent(
             onPrioritySelected = onPrioritySelected
         )
         OutlinedTextField(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().weight(1f),
             value = description,
             onValueChange = { onDescriptionChange(it) },
             label = { Text(text = stringResource(id = R.string.description)) },
@@ -76,9 +79,14 @@ fun TaskContent(
                 unfocusedLabelColor = Custom_dark_blue,
             )
         )
+        Button(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            onClick = onCompleteTask
+        ) {
+            Text(text = "Complete Task")
+        }
     }
 }
-
 
 @Composable
 @Preview
@@ -89,17 +97,7 @@ private fun TaskContentPreview() {
         description = "",
         onDescriptionChange = {},
         priority = Priority.LOW,
-        onPrioritySelected = {}
+        onPrioritySelected = {},
+        onCompleteTask = {}
     )
 }
-
-
-
-
-
-
-
-
-
-
-

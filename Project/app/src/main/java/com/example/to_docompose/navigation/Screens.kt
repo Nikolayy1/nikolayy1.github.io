@@ -1,12 +1,15 @@
+@file:Suppress("ConvertObjectToDataObject")
+
 package com.example.to_docompose.navigation
 
 import com.example.to_docompose.util.Action
-import kotlinx.serialization.Serializable
 
-@Serializable
-sealed class Screen {
-    @Serializable
-    data class List(val action: Action = Action.NO_ACTION): Screen()
-    @Serializable
-    data class Task(val id: Int): Screen()
+sealed class Screen(val route: String) {
+    object Main : Screen("main")
+    object List : Screen("list/{action}") {
+        fun createRoute(action: Action) = "list/${action.name}"
+    }
+    object Task : Screen("task/{taskId}") {
+        fun createRoute(taskId: Int) = "task/$taskId"
+    }
 }
