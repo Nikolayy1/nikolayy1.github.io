@@ -63,6 +63,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.2")
     debugImplementation("androidx.compose.ui:ui-tooling:1.7.2")
+    implementation("androidx.compose.material:material-icons-extended:1.7.6")
 
     // Compose Navigation
     implementation("androidx.navigation:navigation-compose:2.8.1")

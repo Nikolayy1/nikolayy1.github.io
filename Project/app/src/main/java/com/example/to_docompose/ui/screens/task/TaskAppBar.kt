@@ -1,44 +1,43 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.to_docompose.ui.screens.task
 
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.to_docompose.R
 import com.example.to_docompose.components.DisplayAlertDialog
-import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.data.models.ToDoTask
-import com.example.to_docompose.ui.theme.Custom_dark_blue
-import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.util.Action
 
 @Composable
 fun TaskAppBar(
     selectedTask: ToDoTask?,
-    navigateToListScreen: (Action) -> Unit
+    navigateToListScreen: (Action) -> Unit,
+    onQuickBoardToggle: (ToDoTask) -> Unit // Added parameter for QuickBoard toggle
 ) {
     if (selectedTask == null) {
         NewTaskAppBar(navigateToListScreen = navigateToListScreen)
     } else {
         ExistingTaskAppBar(
             selectedTask = selectedTask,
-            navigateToListScreen = navigateToListScreen
+            navigateToListScreen = navigateToListScreen,
+            onQuickBoardToggle = onQuickBoardToggle // Pass toggle handler
         )
     }
 }
@@ -49,100 +48,58 @@ fun NewTaskAppBar(
     navigateToListScreen: (Action) -> Unit
 ) {
     TopAppBar(
-        navigationIcon = {
-            BackAction(onBackClicked = navigateToListScreen)
-        },
         title = {
-            Text(
-                color = Custom_white,
-                text = stringResource(id = R.string.add_task)
-            )
+            Text(text = stringResource(id = R.string.add_task))
         },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Custom_dark_blue
-        ),
         actions = {
-            AddAction(onAddClicked = navigateToListScreen)
+            Row {
+                IconButton(onClick = { navigateToListScreen(Action.NO_ACTION) }) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = stringResource(id = R.string.no_action)
+                    )
+                }
+                IconButton(onClick = { navigateToListScreen(Action.ADD) }) {
+                    Icon(
+                        imageVector = Icons.Default.Check,
+                        contentDescription = stringResource(id = R.string.add_task)
+                    )
+                }
+            }
         }
     )
-}
-
-@Composable
-fun BackAction(
-    onBackClicked: (Action) -> Unit
-) {
-    IconButton(onClick = { onBackClicked(Action.NO_ACTION) }) {
-        Icon(
-            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = stringResource(id = R.string.back_arrow),
-            tint = Custom_white
-        )
-    }
-}
-
-@Composable
-fun AddAction(
-    onAddClicked: (Action) -> Unit
-) {
-    IconButton(onClick = { onAddClicked(Action.ADD) }) {
-        Icon(
-            imageVector = Icons.Filled.Check,
-            contentDescription = stringResource(id = R.string.add_task),
-            tint = Custom_white
-        )
-    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExistingTaskAppBar(
     selectedTask: ToDoTask,
-    navigateToListScreen: (Action) -> Unit
+    navigateToListScreen: (Action) -> Unit,
+    onQuickBoardToggle: (ToDoTask) -> Unit
 ) {
     TopAppBar(
-        navigationIcon = {
-            CloseAction(onCloseClicked = navigateToListScreen)
-        },
         title = {
-            Text(
-                color = Custom_white,
-                text = selectedTask.title,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
+            Text(text = selectedTask.title)
         },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Custom_dark_blue
-        ),
         actions = {
             ExistingTaskAppBarActions(
                 selectedTask = selectedTask,
-                navigateToListScreen = navigateToListScreen
+                navigateToListScreen = navigateToListScreen,
+                onQuickBoardToggle = onQuickBoardToggle
             )
         }
     )
 }
 
 @Composable
-fun CloseAction(
-    onCloseClicked: (Action) -> Unit
-) {
-    IconButton(onClick = { onCloseClicked(Action.NO_ACTION) }) {
-        Icon(
-            imageVector = Icons.Filled.Close,
-            contentDescription = stringResource(id = R.string.close_icon),
-            tint = Custom_white
-        )
-    }
-}
-
-@Composable
 fun ExistingTaskAppBarActions(
     selectedTask: ToDoTask,
-    navigateToListScreen: (Action) -> Unit
+    navigateToListScreen: (Action) -> Unit,
+    onQuickBoardToggle: (ToDoTask) -> Unit
 ) {
     var openDialog by remember { mutableStateOf(false) }
 
+    // Delete confirmation dialog
     DisplayAlertDialog(
         title = stringResource(
             id = R.string.delete_task,
@@ -157,68 +114,28 @@ fun ExistingTaskAppBarActions(
         onYesClicked = { navigateToListScreen(Action.DELETE) }
     )
 
-    DeleteAction(onDeleteClicked = { openDialog = true })
-    UpdateAction(onUpdateClicked = navigateToListScreen)
-}
-
-@Composable
-fun DeleteAction(
-    onDeleteClicked: () -> Unit
-) {
-    IconButton(onClick = { onDeleteClicked() }) {
+    // QuickBoard toggle action
+    IconButton(onClick = { onQuickBoardToggle(selectedTask) }) {
         Icon(
-            imageVector = Icons.Filled.Delete,
-            contentDescription = stringResource(id = R.string.delete_icon),
-            tint = Custom_white
+            imageVector = Icons.Default.Bookmark, // QuickBoard toggle icon
+            contentDescription = stringResource(id = R.string.toggle_quickboard),
+            tint = if (selectedTask.isQuickBoard) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+        )
+    }
+
+    // Delete action
+    IconButton(onClick = { openDialog = true }) {
+        Icon(
+            imageVector = Icons.Default.Delete,
+            contentDescription = stringResource(id = R.string.delete_task)
+        )
+    }
+
+    // Update action
+    IconButton(onClick = { navigateToListScreen(Action.UPDATE) }) {
+        Icon(
+            imageVector = Icons.Default.Edit,
+            contentDescription = stringResource(id = R.string.update_task)
         )
     }
 }
-
-@Composable
-fun UpdateAction(
-    onUpdateClicked: (Action) -> Unit
-) {
-    IconButton(onClick = { onUpdateClicked(Action.UPDATE) }) {
-        Icon(
-            imageVector = Icons.Filled.Check,
-            contentDescription = stringResource(id = R.string.update_icon),
-            tint = Custom_white
-        )
-    }
-}
-
-
-@Composable
-@Preview
-private fun NewTaskAppBarPreview() {
-    NewTaskAppBar(
-        navigateToListScreen = {}
-    )
-}
-
-@Composable
-@Preview
-private fun ExistingTaskAppBarPreview() {
-    ExistingTaskAppBar(
-        selectedTask = ToDoTask(
-            id = 0,
-            title = "Stevdza-San",
-            description = "Some random text",
-            priority = Priority.LOW
-        ),
-        navigateToListScreen = {}
-    )
-}
-
-
-
-
-
-
-
-
-
-
-
-
-

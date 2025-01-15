@@ -45,7 +45,14 @@ fun TaskScreen(
                             displayToast(context = context)
                         }
                     }
-                }
+                },
+                onQuickBoardToggle = { task ->
+                    if (task != null) {
+                        sharedViewModel.toggleQuickBoardStatus(task)
+                    } else {
+                        displayToast(context = context)
+                    }
+                } // Added QuickBoard toggle handler
             )
         },
         content = { padding ->

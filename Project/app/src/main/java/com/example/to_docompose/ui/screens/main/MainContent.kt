@@ -32,7 +32,8 @@ fun MainContent(
     currentXP: Int,
     xpForNextLevel: Int,
     xpProgress: Float,
-    quickBoardTasks: List<ToDoTask>
+    quickBoardTasks: List<ToDoTask>,
+    navigateToTaskScreen: (Int) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -87,7 +88,10 @@ fun MainContent(
         if (quickBoardTasks.isEmpty()) {
             Text(text = "No tasks marked for Quick Board.")
         } else {
-            QuickBoard(tasks = quickBoardTasks)
+            QuickBoard(
+                tasks = quickBoardTasks,
+                onTaskClick = navigateToTaskScreen // Pass navigation function
+            )
         }
 
         Spacer(modifier = Modifier.weight(1f))

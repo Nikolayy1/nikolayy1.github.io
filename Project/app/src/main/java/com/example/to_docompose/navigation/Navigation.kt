@@ -1,15 +1,12 @@
 package com.example.to_docompose.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.to_docompose.navigation.destinations.listComposable
 import com.example.to_docompose.navigation.destinations.mainComposable
 import com.example.to_docompose.navigation.destinations.taskComposable
-import com.example.to_docompose.ui.theme.Custom_beige
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 import com.example.to_docompose.util.Action
 
@@ -27,13 +24,14 @@ fun SetupNavigation(
             navigateToListScreen = {
                 navController.navigate(Screen.List.createRoute(Action.NO_ACTION))
             },
-            sharedViewModel = sharedViewModel
+            sharedViewModel = sharedViewModel,
+            navController = navController
         )
         listComposable(
             navigateToTaskScreen = { taskId ->
                 navController.navigate(Screen.Task.createRoute(taskId))
             },
-            sharedViewModel = sharedViewModel,
+            sharedViewModel = sharedViewModel
         )
         taskComposable(
             navigateToListScreen = { action ->
@@ -43,6 +41,5 @@ fun SetupNavigation(
             },
             sharedViewModel = sharedViewModel
         )
-
     }
 }

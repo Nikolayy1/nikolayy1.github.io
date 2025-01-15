@@ -49,6 +49,7 @@ class SharedViewModel @Inject constructor(
     companion object {
         private const val XP_PER_LEVEL = 10
         private const val MAX_LEVEL = 20
+        private const val MAX_QUICKBOARD_TASKS = 3
     }
 
     // Task Management Attributes
@@ -148,15 +149,22 @@ class SharedViewModel @Inject constructor(
     fun updateQuickBoardTasks() {
         viewModelScope.launch {
             repository.getQuickBoardTasks.collect { tasks ->
-                _quickBoardTasks.value = tasks
+                _quickBoardTasks.value = tasks.take(MAX_QUICKBOARD_TASKS) // Limit to 3 tasks
             }
         }
     }
 
     fun toggleQuickBoardStatus(task: ToDoTask) {
         viewModelScope.launch {
-            repository.markTaskForQuickBoard(task.id, !task.isQuickBoard)
-            updateQuickBoardTasks()
+            val currentQuickBoardTasks = _quickBoardTasks.value
+
+            // Ensure no duplicates and respect the max limit
+            if (task.isQuickBoard || currentQuickBoardTasks.size < MAX_QUICKBOARD_TASKS) {
+                repository.markTaskForQuickBoard(task.id, !task.isQuickBoard)
+
+                // Update the QuickBoard tasks state
+                updateQuickBoardTasks()
+            }
         }
     }
 

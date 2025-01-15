@@ -9,7 +9,7 @@ sealed class Screen(val route: String) {
     object List : Screen("list/{action}") {
         fun createRoute(action: Action) = "list/${action.name}"
     }
-    object Task : Screen("task/{taskId}") {
-        fun createRoute(taskId: Int) = "task/$taskId"
+    object Task : Screen("task_screen/{taskId}") {
+        fun createRoute(taskId: Int) = "task_screen/$taskId"
     }
 }
