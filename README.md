@@ -52,8 +52,9 @@ Possible User Groups:<br>
 
 
 ### Wireframe
-![Mock](https://github.com/user-attachments/assets/35f1ef79-2620-4e8e-be61-d4ece6faeaf6)
+![Mock](https://github.com/user-attachments/assets/d0788712-b369-4aee-8644-49667770f582)
 
 ### User Flow
-![User Flow](https://github.com/user-attachments/assets/dfb74f40-a63d-4987-8929-dc5c651fd40e)
+![User Flow](https://github.com/user-attachments/assets/efa58eeb-5bb2-4b59-be9c-e9ac6eccabea)
+
 
