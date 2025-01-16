@@ -13,22 +13,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.to_docompose.R
 import com.example.to_docompose.components.PriorityDropDown
 import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.ui.theme.Custom_beige
-import com.example.to_docompose.ui.theme.Custom_beige_dark
 import com.example.to_docompose.ui.theme.Custom_dark_blue
 import com.example.to_docompose.ui.theme.Custom_light_blue
 import com.example.to_docompose.ui.theme.Custom_orange
-import com.example.to_docompose.ui.theme.Custom_red
 import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.theme.LARGE_PADDING
 import com.example.to_docompose.ui.theme.MEDIUM_PADDING
@@ -108,7 +104,7 @@ fun TaskContent(
     }
 }
 
-@Composable
+}@Composable
 @Preview
 private fun TaskContentPreview() {
     TaskContent(
