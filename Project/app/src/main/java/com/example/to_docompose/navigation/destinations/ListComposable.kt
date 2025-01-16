@@ -17,7 +17,8 @@ import com.example.to_docompose.util.Action
 @ExperimentalAnimationApi
 fun NavGraphBuilder.listComposable(
     navigateToTaskScreen: (taskId: Int) -> Unit,
-    sharedViewModel: SharedViewModel
+    sharedViewModel: SharedViewModel,
+    navigateToMainScreen: () -> Unit
 ) {
     composable(
         route = Screen.List.route,
@@ -39,7 +40,8 @@ fun NavGraphBuilder.listComposable(
         ListScreen(
             action = databaseAction,
             navigateToTaskScreen = navigateToTaskScreen,
-            sharedViewModel = sharedViewModel
+            sharedViewModel = sharedViewModel,
+            navigateToMainScreen = navigateToMainScreen
         )
     }
 }

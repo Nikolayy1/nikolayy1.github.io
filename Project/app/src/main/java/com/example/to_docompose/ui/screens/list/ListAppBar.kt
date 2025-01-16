@@ -1,5 +1,6 @@
 package com.example.to_docompose.ui.screens.list
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -18,6 +19,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -38,7 +41,9 @@ import com.example.to_docompose.R
 import com.example.to_docompose.components.DisplayAlertDialog
 import com.example.to_docompose.components.PriorityItem
 import com.example.to_docompose.data.models.Priority
+import com.example.to_docompose.ui.theme.Custom_beige
 import com.example.to_docompose.ui.theme.Custom_dark_blue
+import com.example.to_docompose.ui.theme.Custom_light_blue
 import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.theme.LARGE_PADDING
 import com.example.to_docompose.ui.theme.TOP_APP_BAR_HEIGHT
@@ -50,7 +55,8 @@ import com.example.to_docompose.util.SearchAppBarState
 fun ListAppBar(
     sharedViewModel: SharedViewModel,
     searchAppBarState: SearchAppBarState,
-    searchTextState: String
+    searchTextState: String,
+    navigateToMainScreen: () -> Unit
 ) {
     when (searchAppBarState) {
         SearchAppBarState.CLOSED -> {
@@ -66,7 +72,7 @@ fun ListAppBar(
                 },
                 //return to main screen btn
                 onBackClicked = {
-
+                    navigateToMainScreen()
                 }
             )
         }
@@ -109,7 +115,7 @@ fun DefaultListAppBar(
         navigationIcon = {
             IconButton(onClick = { onBackClicked() }) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack, // You can use any appropriate icon
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Back Button", //stringResource(id = R.string.back_button),
                     tint = Custom_white
                 )
@@ -119,7 +125,7 @@ fun DefaultListAppBar(
             ListAppBarActions(
                 onSearchClicked = onSearchClicked,
                 onSortClicked = onSortClicked,
-                onDeleteAllConfirmed = onDeleteAllConfirmed
+                onDeleteAllConfirmed = onDeleteAllConfirmed,
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(
@@ -132,7 +138,7 @@ fun DefaultListAppBar(
 fun ListAppBarActions(
     onSearchClicked: () -> Unit,
     onSortClicked: (Priority) -> Unit,
-    onDeleteAllConfirmed: () -> Unit
+    onDeleteAllConfirmed: () -> Unit,
 ) {
     var openDialog by remember { mutableStateOf(false) }
 
@@ -243,12 +249,14 @@ fun SearchAppBar(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .height(TOP_APP_BAR_HEIGHT),
+            .height(TOP_APP_BAR_HEIGHT)
+            .background(Custom_light_blue),
         shadowElevation = 8.dp
     ) {
         TextField(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .background(Custom_dark_blue),
             value = text,
             onValueChange = {
                 onTextChange(it)
@@ -256,24 +264,26 @@ fun SearchAppBar(
             placeholder = {
                 Text(
                     modifier = Modifier
-                        .alpha(0.5f),
+                        .alpha(0.8f),
                     text = stringResource(id = R.string.search_placeholder),
-                    color = Color.White
+                    color = Custom_white
                 )
             },
             textStyle = TextStyle(
-                fontSize = MaterialTheme.typography.bodyMedium.fontSize
+                fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+                color = Custom_white
             ),
             singleLine = true,
             leadingIcon = {
                 IconButton(
                     modifier = Modifier
-                        .alpha(0.38f),
+                        .alpha(1f),
                     onClick = {}
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Search,
-                        contentDescription = stringResource(id = R.string.search_icon)
+                        contentDescription = stringResource(id = R.string.search_icon),
+                        tint = Custom_white
                     )
                 }
             },
@@ -289,7 +299,8 @@ fun SearchAppBar(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Close,
-                        contentDescription = stringResource(id = R.string.close_icon)
+                        contentDescription = stringResource(id = R.string.close_icon),
+                        tint = Custom_white
                     )
                 }
             },
@@ -300,6 +311,10 @@ fun SearchAppBar(
                 onSearch = {
                     onSearchClicked(text)
                 }
+            ),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Custom_dark_blue,
+                unfocusedContainerColor = Custom_dark_blue
             )
         )
     }

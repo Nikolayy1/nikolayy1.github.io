@@ -72,7 +72,7 @@ fun ListContent(
     sortState: RequestState<Priority>,
     searchAppBarState: SearchAppBarState,
     onSwipeToDelete: (Action, ToDoTask) -> Unit,
-    navigateToTaskScreen: (taskId: Int) -> Unit
+    navigateToTaskScreen: (taskId: Int) -> Unit,
 ) {
     if (sortState is RequestState.Success) {
         when {
@@ -249,7 +249,7 @@ fun TaskItem(
                 Text(
                     modifier = Modifier.weight(8f),
                     text = toDoTask.title,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
                     color = Custom_dark_blue

@@ -31,7 +31,10 @@ fun SetupNavigation(
             navigateToTaskScreen = { taskId ->
                 navController.navigate(Screen.Task.createRoute(taskId))
             },
-            sharedViewModel = sharedViewModel
+            navigateToMainScreen = {
+                navController.navigate(Screen.Main.route)
+            },
+            sharedViewModel = sharedViewModel,
         )
         taskComposable(
             navigateToListScreen = { action ->
@@ -41,5 +44,6 @@ fun SetupNavigation(
             },
             sharedViewModel = sharedViewModel
         )
+
     }
 }

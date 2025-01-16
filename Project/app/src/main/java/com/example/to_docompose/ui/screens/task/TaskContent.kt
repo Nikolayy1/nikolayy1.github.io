@@ -7,22 +7,29 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.to_docompose.R
 import com.example.to_docompose.components.PriorityDropDown
 import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.ui.theme.Custom_beige
+import com.example.to_docompose.ui.theme.Custom_beige_dark
 import com.example.to_docompose.ui.theme.Custom_dark_blue
 import com.example.to_docompose.ui.theme.Custom_light_blue
+import com.example.to_docompose.ui.theme.Custom_orange
+import com.example.to_docompose.ui.theme.Custom_red
+import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.theme.LARGE_PADDING
 import com.example.to_docompose.ui.theme.MEDIUM_PADDING
 
@@ -60,7 +67,7 @@ fun TaskContent(
         )
         HorizontalDivider(
             modifier = Modifier.height(MEDIUM_PADDING),
-            color = MaterialTheme.colorScheme.background
+            color = Custom_beige
         )
         PriorityDropDown(
             priority = priority,
@@ -86,6 +93,17 @@ fun TaskContent(
             ) {
                 Text(text = "Complete Task")
             }
+        Button(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            onClick = onCompleteTask,
+            colors = ButtonColors(
+                containerColor = Custom_orange,
+                contentColor = Custom_white,
+                disabledContentColor = Custom_white.copy(alpha = 0.4f),
+                disabledContainerColor = Custom_orange.copy(alpha = 0.4f)
+            )
+        ) {
+            Text(text = "Complete Task")
         }
     }
 }
