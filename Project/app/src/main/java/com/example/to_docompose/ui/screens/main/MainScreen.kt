@@ -1,5 +1,6 @@
 package com.example.to_docompose.ui.screens.main
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -18,6 +19,15 @@ fun MainScreen(
     val xpForNextLevel by sharedViewModel.xpForNextLevel.collectAsState()
     val xpProgress by sharedViewModel.progressBar.collectAsState()
     val quickBoardTasks = sharedViewModel.quickBoardTasks.collectAsState().value
+    val stats by sharedViewModel.stats.collectAsState()
+
+
+    /// onStatUpgrade callback
+    val onStatUpgrade: (String) -> Unit = { stat ->
+        sharedViewModel.upgradeStat(stat)
+    }
+
+    Log.d("MainScreen", "Stats updated: $stats") // Add this log to verify updates, delete later.
 
     // Pass collected states to MainContent
     MainContent(
@@ -27,6 +37,8 @@ fun MainScreen(
         xpForNextLevel = xpForNextLevel,
         xpProgress = xpProgress,
         quickBoardTasks = quickBoardTasks,
+        stats = stats,
+        onStatUpgrade = { statName -> sharedViewModel.upgradeStat(statName) },
         navigateToTaskScreen = { taskId -> navController.navigate("task_screen/$taskId")
         }
     )

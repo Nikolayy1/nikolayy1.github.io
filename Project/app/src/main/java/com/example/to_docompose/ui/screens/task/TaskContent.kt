@@ -85,22 +85,16 @@ fun TaskContent(
         if (showCompleteButton) { // Conditionally show the button
             Button(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                onClick = onCompleteTask
+                onClick = onCompleteTask,
+                colors = ButtonColors(
+                    containerColor = Custom_orange,
+                    contentColor = Custom_white,
+                    disabledContentColor = Custom_white.copy(alpha = 0.4f),
+                    disabledContainerColor = Custom_orange.copy(alpha = 0.4f)
+                )
             ) {
                 Text(text = "Complete Task")
             }
-        Button(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            onClick = onCompleteTask,
-            colors = ButtonColors(
-                containerColor = Custom_orange,
-                contentColor = Custom_white,
-                disabledContentColor = Custom_white.copy(alpha = 0.4f),
-                disabledContainerColor = Custom_orange.copy(alpha = 0.4f)
-            )
-        ) {
-            Text(text = "Complete Task")
-        }
     }
 }
 

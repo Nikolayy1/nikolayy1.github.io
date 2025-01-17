@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.to_docompose.data.models.Priority
+import com.example.to_docompose.data.models.Stats
 import com.example.to_docompose.data.models.ToDoTask
 import com.example.to_docompose.data.repositories.DataStoreRepository
 import com.example.to_docompose.data.repositories.ToDoRepository
@@ -46,11 +47,15 @@ class SharedViewModel @Inject constructor(
             initialValue = XP_PER_LEVEL
         )
 
+
+
     companion object {
         private const val XP_PER_LEVEL = 10
         private const val MAX_LEVEL = 20
         private const val MAX_QUICKBOARD_TASKS = 3
+        private const val MAX_STATS_PER_ATTRIBUTE = 6
     }
+
 
     // Task Management Attributes
     private val _allTasks = MutableStateFlow<RequestState<List<ToDoTask>>>(RequestState.Idle)
@@ -105,6 +110,7 @@ class SharedViewModel @Inject constructor(
         updateQuickBoardTasks()
         readSortState()
         loadXPAndLevel()
+        loadStats()
     }
 
     // XP and Level Handling
@@ -136,14 +142,81 @@ class SharedViewModel @Inject constructor(
         while (_currentXP.value >= XP_PER_LEVEL * _currentLevel.value && _currentLevel.value < MAX_LEVEL) {
             _currentXP.value -= XP_PER_LEVEL * _currentLevel.value
             _currentLevel.value += 1
+
+            // Update stat points in _stats
+            _stats.value = _stats.value.copy(
+                statPoints = _stats.value.statPoints + 1
+            )
         }
         updateProgressBar()
         saveXPAndLevel()
+        saveStats(_stats.value)
+        loadStats()
     }
 
     private fun updateProgressBar() {
         _progressBar.value = _currentXP.value.toFloat() / (XP_PER_LEVEL * _currentLevel.value)
     }
+
+
+    //*******STATS STUFF*************
+
+    // Declare MutableStateFlow for Stats
+    private val _stats = MutableStateFlow(
+        Stats(
+            discipline = 0,
+            productivity = 0,
+            energy = 0,
+            statPoints = 0,
+        )
+    )
+
+    // Stats Handling
+    private fun loadStats() {
+        viewModelScope.launch {
+            dataStoreRepository.readStats.collect { stats ->
+                _stats.value = stats
+            }
+        }
+    }
+
+    private fun saveStats(updatedStats: Stats) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreRepository.saveStats(
+                discipline = updatedStats.discipline,
+                productivity = updatedStats.productivity,
+                energy = updatedStats.energy,
+                statPoints = updatedStats.statPoints
+            )
+        }
+    }
+
+    fun upgradeStat(stat: String) {
+        if (_stats.value.statPoints > 0) {
+            val updatedStats = when (stat) {
+                "discipline" -> _stats.value.copy(
+                    discipline = (_stats.value.discipline + 1).coerceAtMost(MAX_STATS_PER_ATTRIBUTE),
+                    statPoints = (_stats.value.statPoints - 1).coerceAtLeast(0)
+                )
+                "productivity" -> _stats.value.copy(
+                    productivity = (_stats.value.productivity + 1).coerceAtMost(MAX_STATS_PER_ATTRIBUTE),
+                    statPoints = (_stats.value.statPoints - 1).coerceAtLeast(0)
+                )
+                "energy" -> _stats.value.copy(
+                    energy = (_stats.value.energy + 1).coerceAtMost(MAX_STATS_PER_ATTRIBUTE),
+                    statPoints = (_stats.value.statPoints - 1).coerceAtLeast(0)
+                )
+                else -> _stats.value
+            }
+
+            _stats.value = updatedStats
+            saveStats(updatedStats)
+        }
+    }
+
+    val stats: StateFlow<Stats> = _stats
+
+    //****STATS STUFF END****
 
     // Quick Board Management
     fun updateQuickBoardTasks() {

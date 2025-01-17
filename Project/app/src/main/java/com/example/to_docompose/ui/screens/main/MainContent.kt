@@ -23,12 +23,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.to_docompose.R
+import com.example.to_docompose.data.models.Stats
 import com.example.to_docompose.data.models.ToDoTask
 import com.example.to_docompose.ui.theme.Custom_beige
 import com.example.to_docompose.ui.theme.Custom_dark_blue
@@ -42,12 +43,14 @@ fun MainContent(
     xpForNextLevel: Int,
     xpProgress: Float,
     quickBoardTasks: List<ToDoTask>,
-    navigateToTaskScreen: (Int) -> Unit
+    navigateToTaskScreen: (Int) -> Unit,
+    stats: Stats,
+    onStatUpgrade: (String) -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Custom_beige) // Set background color
+            .background(Custom_beige)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -61,20 +64,50 @@ fun MainContent(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Avatar and Level Display
-        Image(
-            painter = painterResource(id = R.drawable.avatar),
-            contentDescription = "Avatar",
+        // Split Layout for Avatar, Level, and Stats
+        Row(
             modifier = Modifier
-                .size(120.dp)
-                .clipToBounds()
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = "Level $avatarLevel",
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.primary
-        )
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Left Section: Avatar and Level
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.avatar),
+                    contentDescription = "Avatar",
+                    modifier = Modifier
+                        .size(100.dp)
+                        .clip(RoundedCornerShape(50.dp))
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Level $avatarLevel",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            // Right Section: Stats
+            Column(
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp)
+            ) {
+                Stats(
+                    stats = stats,
+                    onStatUpgrade = onStatUpgrade
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -105,10 +138,10 @@ fun MainContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f) // Allow Quick Board to take up most available space
-                .padding(bottom = 16.dp) // Space above the button
-                .background(Custom_dark_blue) // Dark blue background for Quick Board
-                .padding(8.dp) // Inner padding
+                .weight(1f)
+                .padding(bottom = 16.dp)
+                .background(Custom_dark_blue)
+                .padding(8.dp)
         ) {
             // Quick Board Title
             Row(
@@ -117,19 +150,19 @@ fun MainContent(
                     .background(Color.LightGray)
                     .padding(8.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center // Center title and icon
+                horizontalArrangement = Arrangement.Center
             ) {
                 Text(
                     text = "Quick Board",
                     fontSize = 20.sp,
                     style = MaterialTheme.typography.titleMedium,
-                    color = Color.Black // Set title color to black
+                    color = Color.Black
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
                     imageVector = Icons.Filled.Bookmark,
                     contentDescription = "Quick Board Bookmark",
-                    tint = Color.Black // Keep icon black
+                    tint = Color.Black
                 )
             }
 
@@ -137,7 +170,7 @@ fun MainContent(
 
             if (quickBoardTasks.isEmpty()) {
                 Text(
-                    text = "No quests marked for Quick Board",
+                    text = "No quests marked for Quick Board.",
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(vertical = 8.dp),
                     color = Color.White

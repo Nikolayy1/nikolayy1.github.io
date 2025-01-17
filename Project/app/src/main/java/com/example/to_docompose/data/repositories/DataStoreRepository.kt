@@ -9,6 +9,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.to_docompose.data.models.Priority
+import com.example.to_docompose.data.models.Stats
 import com.example.to_docompose.util.Constants.PREFERENCE_KEY
 import com.example.to_docompose.util.Constants.PREFERENCE_NAME
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -30,6 +31,10 @@ class DataStoreRepository @Inject constructor(
         val sortKey = stringPreferencesKey(name = PREFERENCE_KEY)
         val xpKey = intPreferencesKey(name = "XP_KEY")
         val levelKey = intPreferencesKey(name = "LEVEL_KEY")
+        val disciplineKey = intPreferencesKey(name = "DISCIPLINE_KEY")
+        val productivityKey = intPreferencesKey(name = "PRODUCTIVITY_KEY")
+        val energyKey = intPreferencesKey(name = "ENERGY_KEY")
+        val statPointsKey = intPreferencesKey(name = "STAT_POINTS_KEY")
     }
 
     private val dataStore = context.dataStore
@@ -76,5 +81,31 @@ class DataStoreRepository @Inject constructor(
             val xp = preferences[PreferenceKeys.xpKey] ?: 0
             val level = preferences[PreferenceKeys.levelKey] ?: 1
             xp to level
+        }
+
+    // Persist Stats
+    suspend fun saveStats(discipline: Int, productivity: Int, energy: Int, statPoints: Int) {
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.disciplineKey] = discipline
+            preferences[PreferenceKeys.productivityKey] = productivity
+            preferences[PreferenceKeys.energyKey] = energy
+            preferences[PreferenceKeys.statPointsKey] = statPoints
+        }
+    }
+
+    val readStats: Flow<Stats> = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }
+        .map { preferences ->
+            val discipline = preferences[PreferenceKeys.disciplineKey] ?: 0
+            val productivity = preferences[PreferenceKeys.productivityKey] ?: 0
+            val energy = preferences[PreferenceKeys.energyKey] ?: 0
+            val statPoints = preferences[PreferenceKeys.statPointsKey] ?: 0
+            Stats(discipline, productivity, energy, statPoints)
         }
 }
