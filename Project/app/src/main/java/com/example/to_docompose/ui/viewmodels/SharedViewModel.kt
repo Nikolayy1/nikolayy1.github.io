@@ -331,7 +331,7 @@ class SharedViewModel @Inject constructor(
     private fun updateTask() {
         viewModelScope.launch(Dispatchers.IO) {
             _selectedTask.value?.let { task ->
-                repository.updateTask(task.copy(title = title, description = description))
+                repository.updateTask(task.copy(title = title, description = description, priority = priority))
             }
         }
     }
