@@ -4,7 +4,9 @@ package com.example.to_docompose.ui.screens.task
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
@@ -79,6 +81,14 @@ fun ExistingTaskAppBar(
     onQuickBoardToggle: (ToDoTask) -> Unit
 ) {
     TopAppBar(
+        navigationIcon = {
+            IconButton(onClick = { navigateToListScreen(Action.NO_ACTION) }) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = stringResource(id = R.string.back_to_list)
+                )
+            }
+        },
         title = {
             Text(text = selectedTask.title)
         },
@@ -118,7 +128,7 @@ fun ExistingTaskAppBarActions(
     // QuickBoard toggle action
     IconButton(onClick = { onQuickBoardToggle(selectedTask) }) {
         Icon(
-            imageVector = Icons.Default.Bookmark, // QuickBoard toggle icon
+            imageVector = if (selectedTask.isQuickBoard) Icons.Default.Bookmark else Icons.Default.BookmarkBorder,
             contentDescription = stringResource(id = R.string.toggle_quickboard),
             tint = if (selectedTask.isQuickBoard) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
         )

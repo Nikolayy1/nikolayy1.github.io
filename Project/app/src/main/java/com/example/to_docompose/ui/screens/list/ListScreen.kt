@@ -51,13 +51,14 @@ fun ListScreen(
     val searchTextState: String = sharedViewModel.searchTextState
 
     val snackBarHostState = remember { SnackbarHostState() }
+    val expPoints = sharedViewModel.expPointsEarned
 
+    // Display the snackbar for task completion
     DisplaySnackBar(
         snackBarHostState = snackBarHostState,
-        onComplete = { sharedViewModel.updateAction(newAction = it) },
-        onUndoClicked = { sharedViewModel.updateAction(newAction = it) },
-        taskTitle = sharedViewModel.title,
-        action = action
+        expPoints = expPoints,
+        action = action,
+        sharedViewModel = sharedViewModel
     )
 
     Scaffold(
@@ -113,40 +114,19 @@ fun ListFab(
 @Composable
 fun DisplaySnackBar(
     snackBarHostState: SnackbarHostState,
-    onComplete: (Action) -> Unit,
-    onUndoClicked: (Action) -> Unit,
-    taskTitle: String,
-    action: Action
+    expPoints: Int,
+    action: Action,
+    sharedViewModel: SharedViewModel
 ) {
     LaunchedEffect(key1 = action) {
-        if (action != Action.NO_ACTION) {
-            val snackBarResult = snackBarHostState.showSnackbar(
-                message = setMessage(action = action, taskTitle = taskTitle),
-                actionLabel = setActionLabel(action = action),
+        if (action == Action.COMPLETE_TASK) {
+            val result = snackBarHostState.showSnackbar(
+                message = "Task completed! You earned $expPoints EXP points.",
                 duration = SnackbarDuration.Short
             )
-            if (snackBarResult == SnackbarResult.ActionPerformed
-                && action == Action.DELETE
-            ) {
-                onUndoClicked(Action.UNDO)
-            } else if (snackBarResult == SnackbarResult.Dismissed || action != Action.DELETE) {
-                onComplete(Action.NO_ACTION)
+            if (result == SnackbarResult.Dismissed) {
+                sharedViewModel.updateAction(Action.NO_ACTION) // Reset action after snackbar
             }
         }
-    }
-}
-
-private fun setMessage(action: Action, taskTitle: String): String {
-    return when (action) {
-        Action.DELETE_ALL -> "All Tasks Removed."
-        else -> "${action.name}: $taskTitle"
-    }
-}
-
-private fun setActionLabel(action: Action): String {
-    return if (action.name == "DELETE") {
-        "UNDO"
-    } else {
-        "OK"
     }
 }

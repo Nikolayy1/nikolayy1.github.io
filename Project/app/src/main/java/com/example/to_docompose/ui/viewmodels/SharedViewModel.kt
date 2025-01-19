@@ -104,6 +104,9 @@ class SharedViewModel @Inject constructor(
     var searchTextState by mutableStateOf("")
         private set
 
+    var expPointsEarned by mutableStateOf(0)
+        private set
+
     // Initialization
     init {
         getAllTasks()
@@ -139,6 +142,8 @@ class SharedViewModel @Inject constructor(
             else -> 0
         }
         _currentXP.value += xpGained
+        expPointsEarned = xpGained
+
         while (_currentXP.value >= XP_PER_LEVEL * _currentLevel.value && _currentLevel.value < MAX_LEVEL) {
             _currentXP.value -= XP_PER_LEVEL * _currentLevel.value
             _currentLevel.value += 1
@@ -148,10 +153,19 @@ class SharedViewModel @Inject constructor(
                 statPoints = _stats.value.statPoints + 1
             )
         }
+        // Save updates
         updateProgressBar()
         saveXPAndLevel()
         saveStats(_stats.value)
         loadStats()
+
+        // Trigger snackbar notification
+        action = Action.COMPLETE_TASK
+
+        // Delete the task
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteTask(task)
+        }
     }
 
     private fun updateProgressBar() {
@@ -312,6 +326,9 @@ class SharedViewModel @Inject constructor(
             }
             Action.UNDO -> {
                 undoTask()
+            }
+            Action.COMPLETE_TASK -> {
+                // Task completion logic should already handle this
             }
             else -> {}
         }

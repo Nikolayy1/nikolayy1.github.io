@@ -76,8 +76,8 @@ fun TaskScreen(
                 showCompleteButton = selectedTask != null, // Only show button when viewing a task
                 onCompleteTask = {
                     if (selectedTask != null) {
-                        sharedViewModel.completeTask(selectedTask)
-                        navigateToListScreen(Action.DELETE)
+                        sharedViewModel.completeTask(selectedTask) // Award EXP and delete task
+                        navigateToListScreen(Action.COMPLETE_TASK) // Pass COMPLETE_TASK action
                     } else {
                         displayToast(context = context)
                     }

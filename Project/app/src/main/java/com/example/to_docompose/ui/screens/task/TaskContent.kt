@@ -38,7 +38,7 @@ fun TaskContent(
     onDescriptionChange: (String) -> Unit,
     priority: Priority,
     onPrioritySelected: (Priority) -> Unit,
-    showCompleteButton: Boolean, // New parameter to control button visibility
+    showCompleteButton: Boolean,
     onCompleteTask: () -> Unit
 ) {
     Column(
@@ -82,7 +82,7 @@ fun TaskContent(
                 unfocusedLabelColor = Custom_dark_blue,
             )
         )
-        if (showCompleteButton) { // Conditionally show the button
+        if (showCompleteButton) { //only appears for a created task
             Button(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 onClick = onCompleteTask,
@@ -108,7 +108,7 @@ private fun TaskContentPreview() {
         onDescriptionChange = {},
         priority = Priority.MEDIUM,
         onPrioritySelected = {},
-        showCompleteButton = true, // Set to true for preview
+        showCompleteButton = true,
         onCompleteTask = {}
     )
 }
