@@ -43,14 +43,24 @@ fun QuickBoardTaskItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
-            .clickable { onClick() }, // Navigate when clicked
+            .clickable { onClick() },
         elevation = CardDefaults.cardElevation(
             defaultElevation = 4.dp
         )
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = task.title)
-            Text(text = task.description, modifier = Modifier.padding(top = 4.dp))
+            // Bold title
+            Text(
+                text = task.title,
+                style = androidx.compose.ui.text.TextStyle(
+                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                )
+            )
+            // Limited description of the quest content for the quickboard, otherwise the third button get cut off
+            Text(
+                text = task.description.take(30) + if (task.description.length > 30) "..." else "",
+                modifier = Modifier.padding(top = 4.dp)
+            )
         }
     }
 }
