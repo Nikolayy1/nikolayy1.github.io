@@ -118,10 +118,62 @@ fun DisplaySnackBar(
     action: Action,
     sharedViewModel: SharedViewModel
 ) {
+    // List of dynamic completion messages
+    val completionMessages = listOf(
+        "Effort brings growth. +%d EXP.",
+        "Progress is forged in action. +%d EXP.",
+        "Your diligence pays off with +%d EXP.",
+        "Each task strengthens your resolve. +%d EXP.",
+        "A step forward, a reward of +%d EXP.",
+        "Completion builds mastery. +%d EXP.",
+        "Victory rewards you with +%d EXP.",
+        "With effort comes reward: +%d EXP.",
+        "Your journey advances. +%d EXP.",
+        "Another task, another gain: +%d EXP.",
+        "Quest complete! Your to-do list trembles in fear.",
+        "That task didn’t stand a chance. +%d EXP!",
+        "Boom! Another one bites the dust. +%d EXP.",
+        "Somewhere, the procrastination gods weep. +%d EXP.",
+        "Finally, that task won't be haunting you anymore. +%d EXP.",
+        "You slayed that task like a boss. Your to-do list cowers. +%d EXP.",
+        "One task down, now back to pretending you’re busy. +%d EXP.",
+        "That task was no match for your barely contained determination. +%d EXP.",
+        "Hasta la vista, task. +%d EXP.",
+        "Do. Or do not. There is no try. +%d EXP.",
+        "Victory achieved. Task complete. +%d EXP.",
+        "The cake was a lie, but the task wasn’t. +%d EXP.",
+        "You’ve entered God Mode of task completion. +%d EXP.",
+        "From zero to hero: Task completed! +%d EXP.",
+        "Another task bites the dust. Fatality! +%d EXP.",
+        "Round 1: Task. Round 2: Complete. Fight Over. +%d EXP.",
+        "Task annihilated! Fatality! +%d EXP.",
+        "Your task has been finished. Flawless performance. +%d EXP.",
+        "Your to-do list is begging for mercy. Mercy denied! +%d EXP.",
+        "The Productivity Gods are proud of you. Another task down. +%d EXP.",
+        "Step by step, you carve your own legend. +%d EXP.",
+        "Task neutralized. You’re one step closer to greatness. +%d EXP.",
+        "System update: Task complete. Efficiency increased. +%d EXP.",
+        "Congrats, you’re officially better than average. +%d EXP.",
+        "Your victory echoes through the ages. +%d EXP earned in glory.",
+        "Look at you, all productive and stuff. +%d EXP.",
+        "Through the ashes, you rise triumphant. +%d EXP.",
+        "The task is complete. You have done well. +%d EXP.",
+        "Impressive. Most impressive. +%d EXP.",
+        "Most underestimate the power of focus and discipline, but not you. +%d EXP.",
+        "The force is strong with you. +%d EXP.",
+    )
+
+    // Function to randomly select a message
+    fun getRandomCompletionMessage(expPoints: Int): String {
+        return completionMessages.random().format(expPoints)
+    }
+
     LaunchedEffect(key1 = action) {
         if (action == Action.COMPLETE_TASK) {
+            // Use a random message
+            val message = getRandomCompletionMessage(expPoints)
             val result = snackBarHostState.showSnackbar(
-                message = "Task completed! You earned $expPoints EXP points.",
+                message = message,
                 duration = SnackbarDuration.Short
             )
             if (result == SnackbarResult.Dismissed) {
@@ -130,3 +182,4 @@ fun DisplaySnackBar(
         }
     }
 }
+
