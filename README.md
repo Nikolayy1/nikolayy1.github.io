@@ -84,5 +84,25 @@ Using Nielsen's 10 we evaluated the current version of our app. Below are our fi
 #### 6. Help and Documentation
 - New users might not know the system of EXP/Leveling/Stats
 
+### Hypothesis & Questions
+#### Initial Hypothoses
+Users who enjoy gamified systems will find the app more motivating compared to traditional task management apps.
 
+#### Questions
+Do users find this app more motivating than traditional management apps?<br>
+How intuitive is the Quick Board for prioritizing tasks?<br>
+Are users satisfied with the stat allocation process, and does it encourage continued use?<br>
+How well do users understand the visual hierarchy of task categories (Low, Medium, High)?<br>
 
+### Data Collection
+#### Dependent Variables
+- Task Completion Rate
+- Time on Task: Average time spent completing tasks.
+- Ease of use: SEQ after task
+
+#### Methods
+- SEQ
+- Interview
+- Microsoft Forms
+
+Link to Forms: https://forms.office.com/e/1DtAKgYDsM
