@@ -57,4 +57,32 @@ Possible User Groups:<br>
 ### User Flow
 ![User Flow](https://github.com/user-attachments/assets/efa58eeb-5bb2-4b59-be9c-e9ac6eccabea)
 
+## Usability Test Plan
+### Heuristic Evaluation
+Using Nielsen's 10 we evaluated the current version of our app. Below are our findings:
+
+#### 1. Visibility of System Status
+- No clear indication that a quest got successfully created
+- Search bar: No information provided to press on search button to complete the operation
+- Filter: Not showing what filter is currently applied
+- No confirmation that the edited quest got saved
+- No Error Message when wanting to add more than 3 tasks to quick board
+
+#### 2. User Control and Freedom
+- Once marking a quest as completed, it's gone (no undo option)
+
+#### 3. Error Prevention
+- Users can leave the edited quest without saving
+- Users could try to mark more than 3 tasks on the quick board
+
+#### 4. Recognition Rather Than Recall
+- Icons rely heavily on the user knowing what they do (like saving, deleting, ...)
+
+#### 5. Aesthetic and Minimalist Design
+- Beige color might feel less engaging to users (try new color schemes)
+
+#### 6. Help and Documentation
+- New users might not know the system of EXP/Leveling/Stats
+
+
 
