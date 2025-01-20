@@ -1,6 +1,7 @@
 package com.example.to_docompose.ui.viewmodels
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -90,7 +91,7 @@ class SharedViewModel @Inject constructor(
     var action by mutableStateOf(Action.NO_ACTION)
         private set
 
-    var id by mutableStateOf(0)
+    var id by mutableIntStateOf(0)
         private set
     var title by mutableStateOf("")
         private set
@@ -104,8 +105,7 @@ class SharedViewModel @Inject constructor(
     var searchTextState by mutableStateOf("")
         private set
 
-    var expPointsEarned by mutableStateOf(0)
-        private set
+    private var expPointsEarned by mutableIntStateOf(0)
 
     // Initialization
     init {
@@ -233,7 +233,7 @@ class SharedViewModel @Inject constructor(
     //****STATS STUFF END****
 
     // Quick Board Management
-    fun updateQuickBoardTasks() {
+    private fun updateQuickBoardTasks() {
         viewModelScope.launch {
             repository.getQuickBoardTasks.collect { tasks ->
                 _quickBoardTasks.value = tasks.take(MAX_QUICKBOARD_TASKS) // Limit to 3 tasks

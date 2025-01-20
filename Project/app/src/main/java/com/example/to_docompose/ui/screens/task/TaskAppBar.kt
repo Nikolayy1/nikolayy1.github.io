@@ -4,13 +4,13 @@ package com.example.to_docompose.ui.screens.task
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,8 +35,10 @@ fun TaskAppBar(
     onQuickBoardToggle: (ToDoTask) -> Unit
 ) {
     if (selectedTask == null) {
+        // Safeguard: Show new task app bar only if ID is 0 (new tasks)
         NewTaskAppBar(navigateToListScreen = navigateToListScreen)
     } else {
+        // Existing task handling
         ExistingTaskAppBar(
             selectedTask = selectedTask,
             navigateToListScreen = navigateToListScreen,
@@ -44,6 +46,7 @@ fun TaskAppBar(
         )
     }
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,7 +87,7 @@ fun ExistingTaskAppBar(
         navigationIcon = {
             IconButton(onClick = { navigateToListScreen(Action.NO_ACTION) }) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = stringResource(id = R.string.back_to_list)
                 )
             }
@@ -145,7 +148,7 @@ fun ExistingTaskAppBarActions(
     // Update action
     IconButton(onClick = { navigateToListScreen(Action.UPDATE) }) {
         Icon(
-            imageVector = Icons.Default.Edit,
+            imageVector = Icons.Default.Save,
             contentDescription = stringResource(id = R.string.update_task)
         )
     }

@@ -7,6 +7,8 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.example.to_docompose.data.models.Priority
@@ -27,6 +29,14 @@ fun TaskScreen(
 
     val context = LocalContext.current
 
+    // Persist selectedTask with a mutable state to handle recompositions
+    val stableTask = remember { mutableStateOf(selectedTask) }
+
+    // Update the stableTask only when selectedTask changes
+    if (stableTask.value != selectedTask) {
+        stableTask.value = selectedTask
+    }
+
     BackHandler {
         navigateToListScreen(Action.NO_ACTION)
     }
@@ -34,7 +44,7 @@ fun TaskScreen(
     Scaffold(
         topBar = {
             TaskAppBar(
-                selectedTask = selectedTask,
+                selectedTask = stableTask.value,
                 navigateToListScreen = { action ->
                     if (action == Action.NO_ACTION) {
                         navigateToListScreen(action)
@@ -73,14 +83,12 @@ fun TaskScreen(
                 onPrioritySelected = {
                     sharedViewModel.updatePriority(newPriority = it)
                 },
-                showCompleteButton = selectedTask != null, // Only show button when viewing a task
+                showCompleteButton = stableTask.value != null,
                 onCompleteTask = {
-                    if (selectedTask != null) {
-                        sharedViewModel.completeTask(selectedTask) // Award EXP and delete task
+                    stableTask.value?.let {
+                        sharedViewModel.completeTask(it) // Award EXP and delete task
                         navigateToListScreen(Action.COMPLETE_TASK) // Pass COMPLETE_TASK action
-                    } else {
-                        displayToast(context = context)
-                    }
+                    } ?: displayToast(context = context)
                 }
             )
         }
