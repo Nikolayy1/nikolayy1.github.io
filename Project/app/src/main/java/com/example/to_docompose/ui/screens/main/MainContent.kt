@@ -80,10 +80,10 @@ fun MainContent(
                     .padding(end = 8.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.avatar),
+                    painter = painterResource(id = R.drawable.avataaars),
                     contentDescription = "Avatar",
                     modifier = Modifier
-                        .size(100.dp)
+                        .size(150.dp)
                         .clip(RoundedCornerShape(50.dp))
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -113,7 +113,7 @@ fun MainContent(
 
         // XP Progress Section
         Text(
-            text = "XP Progress",
+            text = "EXP Progress",
             fontSize = 16.sp,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground
