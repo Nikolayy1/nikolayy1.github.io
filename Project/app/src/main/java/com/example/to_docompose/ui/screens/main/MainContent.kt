@@ -1,11 +1,16 @@
 package com.example.to_docompose.ui.screens.main
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,24 +22,28 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.to_docompose.R
 import com.example.to_docompose.data.models.Stats
 import com.example.to_docompose.data.models.ToDoTask
 import com.example.to_docompose.ui.theme.Custom_beige
 import com.example.to_docompose.ui.theme.Custom_dark_blue
 import com.example.to_docompose.ui.theme.Custom_orange
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainContent(
     navigateToListScreen: () -> Unit,
@@ -46,7 +55,12 @@ fun MainContent(
     navigateToTaskScreen: (Int) -> Unit,
     stats: Stats,
     onStatUpgrade: (String) -> Unit,
+    selectedAvatar: Int,
+    onAvatarChange: (Int) -> Unit
 ) {
+    // State to show/hide avatar selection dialog
+    var showAvatarSelection by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -79,12 +93,17 @@ fun MainContent(
                     .weight(1f)
                     .padding(end = 8.dp)
             ) {
+                // Avatar with Long Press
                 Image(
-                    painter = painterResource(id = R.drawable.avataaars),
+                    painter = painterResource(id = selectedAvatar),
                     contentDescription = "Avatar",
                     modifier = Modifier
                         .size(150.dp)
                         .clip(RoundedCornerShape(50.dp))
+                        .combinedClickable(
+                            onClick = { /* Handle regular click if needed */ },
+                            onLongClick = { showAvatarSelection = true } // Trigger dialog on long press
+                        )
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
@@ -109,37 +128,65 @@ fun MainContent(
             }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         // XP Progress Section
-        Text(
-            text = "EXP Progress",
-            fontSize = 16.sp,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onBackground
-        )
-        LinearProgressIndicator(
-            progress = xpProgress,
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            color = MaterialTheme.colorScheme.primary
-        )
-        Text(
-            text = "$currentXP / $xpForNextLevel EXP",
-            fontSize = 16.sp,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onBackground
-        )
+                .padding(16.dp)
+        ) {
+            // Title
+            Text(
+                text = "XP Progress",
+                fontSize = 20.sp,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold
+            )
 
-        Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Progress Bar Container
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(24.dp)
+                    .clip(MaterialTheme.shapes.medium)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
+            ) {
+                // Progress Indicator
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .fillMaxWidth(fraction = xpProgress) // Progress fraction
+                        .clip(MaterialTheme.shapes.medium)
+                        .background(MaterialTheme.colorScheme.primary)
+                        .animateContentSize() // Smooth animation when progress changes
+                )
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // XP Text
+            Text(
+                text = "$currentXP / $xpForNextLevel XP",
+                fontSize = 16.sp,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Medium
+            )
+        }
+
+        Spacer(modifier = Modifier.height(6.dp))
 
         // Quick Board Section
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
-                .padding(bottom = 16.dp)
+                .weight(1.5f)
+                .padding(bottom = 8.dp)
                 .background(Custom_dark_blue)
                 .padding(8.dp)
         ) {
@@ -188,7 +235,8 @@ fun MainContent(
             onClick = navigateToListScreen,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(50.dp),
+                .height(50.dp)
+                .padding(top = 8.dp),
             shape = RoundedCornerShape(0.dp),
             colors = androidx.compose.material3.ButtonDefaults.buttonColors(
                 containerColor = Custom_orange
@@ -200,5 +248,17 @@ fun MainContent(
                 color = MaterialTheme.colorScheme.onPrimary
             )
         }
+    }
+
+    // Avatar Selection Dialog
+    if (showAvatarSelection) {
+        AvatarSelectionDialog(
+            selectedAvatar = selectedAvatar,
+            onAvatarSelected = { avatar ->
+                onAvatarChange(avatar)
+                showAvatarSelection = false
+            },
+            onDismiss = { showAvatarSelection = false }
+        )
     }
 }

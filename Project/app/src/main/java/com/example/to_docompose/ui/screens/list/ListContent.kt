@@ -159,7 +159,7 @@ fun TaskItem(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f),
-                    contentAlignment = Alignment.TopEnd
+                    contentAlignment = Alignment.CenterEnd
                 ) {
                     Canvas(
                         modifier = Modifier
