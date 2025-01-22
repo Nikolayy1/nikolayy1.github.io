@@ -33,4 +33,6 @@
     <string name="complete_task_title">Mark \'%1$s\' as Complete?</string>
     <string name="complete_task_confirmation">Are you sure you want to mark \'%1$s\' as complete? This action cannot be undone!</string>
     <string name="complete_task_reward">Completing this task will reward you with %1$d XP.</string>
+    <string name="daily_quest">Daily Quest</string>
+    <string name="daily_quest_splash">Daily Quest</string>
 </resources>
