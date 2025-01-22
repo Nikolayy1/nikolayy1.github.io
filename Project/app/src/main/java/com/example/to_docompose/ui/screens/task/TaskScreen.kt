@@ -57,11 +57,7 @@ fun TaskScreen(
                     }
                 },
                 onQuickBoardToggle = { task ->
-                    if (task != null) {
-                        sharedViewModel.toggleQuickBoardStatus(task)
-                    } else {
-                        displayToast(context = context)
-                    }
+                    sharedViewModel.toggleQuickBoardStatus(task)
                 }
             )
         },
