@@ -139,7 +139,7 @@ fun MainContent(
         ) {
             // Title
             Text(
-                text = "XP Progress",
+                text = "EXP Progress",
                 fontSize = 20.sp,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.primary,
@@ -171,7 +171,7 @@ fun MainContent(
 
             // XP Text
             Text(
-                text = "$currentXP / $xpForNextLevel XP",
+                text = "$currentXP / $xpForNextLevel EXP",
                 fontSize = 16.sp,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onBackground,
