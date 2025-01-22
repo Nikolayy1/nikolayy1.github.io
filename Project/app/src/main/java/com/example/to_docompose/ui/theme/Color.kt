@@ -3,13 +3,12 @@ package com.example.to_docompose.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val Custom_orange = Color(0xffdda853)
-val Custom_beige = Color(0xfffbf5dd)
+val Custom_white_background = Color(0xfff5f5f5)
 val Custom_beige_dark = Color(0xfff6e8af)
 val Custom_light_blue = Color(0xffa6cdc6)
 val Custom_dark_blue = Color(0xff16404d)
 val Custom_white = Color(0xFFFFFFFF)
 val Custom_red = Color(0xFFB3261E)
-
 
 
 val md_theme_light_primary = Custom_dark_blue
@@ -29,7 +28,7 @@ val md_theme_light_onError = Color(0xFFFFFFFF)
 val md_theme_light_errorContainer = Color(0xFFF9DEDC)
 val md_theme_light_onErrorContainer = Color(0xFF410E0B)
 val md_theme_light_outline = Color(0xFF79747E)
-val md_theme_light_background = Custom_beige
+val md_theme_light_background = Custom_white_background
 val md_theme_light_onBackground = Color(0xFF1C1B1F)
 val md_theme_light_surface = Color(0xfffbf5dd)
 val md_theme_light_onSurface = Color(0xFF1C1B1F)

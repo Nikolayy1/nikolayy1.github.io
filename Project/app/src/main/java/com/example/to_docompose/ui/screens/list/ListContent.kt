@@ -24,7 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.data.models.ToDoTask
-import com.example.to_docompose.ui.theme.Custom_beige
+import com.example.to_docompose.ui.theme.Custom_white_background
 import com.example.to_docompose.ui.theme.Custom_dark_blue
 import com.example.to_docompose.ui.theme.Custom_light_blue
 import com.example.to_docompose.ui.theme.LARGE_PADDING
@@ -139,7 +139,7 @@ fun TaskItem(
         onClick = {
             navigateToTaskScreen(toDoTask.id)
         },
-        color = Custom_beige
+        color = Custom_white_background
     ) {
         Column(
             modifier = Modifier

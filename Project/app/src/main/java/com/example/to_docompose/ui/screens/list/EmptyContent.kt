@@ -17,14 +17,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.to_docompose.R
-import com.example.to_docompose.ui.theme.Custom_beige
+import com.example.to_docompose.ui.theme.Custom_white_background
 
 @Composable
 fun DisplayEmptyContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Custom_beige),
+            .background(Custom_white_background),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

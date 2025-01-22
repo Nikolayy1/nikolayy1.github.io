@@ -20,3 +20,4 @@ fun NavGraphBuilder.mainComposable(
         )
     }
 }
+

@@ -1,5 +1,6 @@
 package com.example.to_docompose.ui.screens.main
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.to_docompose.data.models.ToDoTask
+import com.example.to_docompose.ui.theme.Custom_dark_blue
+import com.example.to_docompose.ui.theme.Custom_light_blue
+import com.example.to_docompose.ui.theme.Custom_white
+import com.example.to_docompose.ui.theme.Custom_white_background
 
 @Composable
 fun QuickBoard(
@@ -47,6 +52,9 @@ fun QuickBoardTaskItem(
             .clickable { onClick() },
         elevation = CardDefaults.cardElevation(
             defaultElevation = 4.dp
+        ),
+        colors = CardDefaults.cardColors(
+            containerColor = Custom_white_background
         )
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -55,13 +63,15 @@ fun QuickBoardTaskItem(
                 text = task.title,
                 style = androidx.compose.ui.text.TextStyle(
                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
-                )
+                ),
+                color = Custom_dark_blue
             )
             // Limited description of the quest content for the quickboard, otherwise the third button get cut off
             Text(
                 text = task.description.take(30) + if (task.description.length > 30) "..." else "",
                 style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(top = 4.dp)
+                modifier = Modifier.padding(top = 4.dp),
+                color = Custom_dark_blue
             )
         }
     }

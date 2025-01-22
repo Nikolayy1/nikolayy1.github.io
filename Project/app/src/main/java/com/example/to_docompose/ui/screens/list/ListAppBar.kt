@@ -19,7 +19,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -30,7 +29,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -41,7 +39,6 @@ import com.example.to_docompose.R
 import com.example.to_docompose.components.DisplayAlertDialog
 import com.example.to_docompose.components.PriorityItem
 import com.example.to_docompose.data.models.Priority
-import com.example.to_docompose.ui.theme.Custom_beige
 import com.example.to_docompose.ui.theme.Custom_dark_blue
 import com.example.to_docompose.ui.theme.Custom_light_blue
 import com.example.to_docompose.ui.theme.Custom_white

@@ -17,6 +17,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,6 +27,9 @@ import androidx.compose.ui.res.stringResource
 import com.example.to_docompose.R
 import com.example.to_docompose.components.DisplayAlertDialog
 import com.example.to_docompose.data.models.ToDoTask
+import com.example.to_docompose.ui.theme.Custom_dark_blue
+import com.example.to_docompose.ui.theme.Custom_light_blue
+import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.util.Action
 
 @Composable
@@ -55,24 +59,32 @@ fun NewTaskAppBar(
 ) {
     TopAppBar(
         title = {
-            Text(text = stringResource(id = R.string.add_task))
+            Text(
+                color = Custom_white,
+                text = stringResource(id = R.string.add_task)
+            )
         },
         actions = {
             Row {
                 IconButton(onClick = { navigateToListScreen(Action.NO_ACTION) }) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = stringResource(id = R.string.no_action)
+                        contentDescription = stringResource(id = R.string.no_action),
+                        tint = Custom_white
                     )
                 }
                 IconButton(onClick = { navigateToListScreen(Action.ADD) }) {
                     Icon(
                         imageVector = Icons.Default.Check,
-                        contentDescription = stringResource(id = R.string.add_task)
+                        contentDescription = stringResource(id = R.string.add_task),
+                        tint = Custom_white
                     )
                 }
             }
-        }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Custom_dark_blue
+        )
     )
 }
 
@@ -88,12 +100,13 @@ fun ExistingTaskAppBar(
             IconButton(onClick = { navigateToListScreen(Action.NO_ACTION) }) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = stringResource(id = R.string.back_to_list)
+                    contentDescription = stringResource(id = R.string.back_to_list),
+                    tint = Custom_white
                 )
             }
         },
         title = {
-            Text(text = selectedTask.title)
+            Text(text = selectedTask.title, color = Custom_white)
         },
         actions = {
             ExistingTaskAppBarActions(
@@ -101,7 +114,10 @@ fun ExistingTaskAppBar(
                 navigateToListScreen = navigateToListScreen,
                 onQuickBoardToggle = onQuickBoardToggle
             )
-        }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Custom_dark_blue
+        )
     )
 }
 
@@ -133,7 +149,7 @@ fun ExistingTaskAppBarActions(
         Icon(
             imageVector = if (selectedTask.isQuickBoard) Icons.Default.Bookmark else Icons.Default.BookmarkBorder,
             contentDescription = stringResource(id = R.string.toggle_quickboard),
-            tint = if (selectedTask.isQuickBoard) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+            tint = if (selectedTask.isQuickBoard) Custom_white else Custom_light_blue
         )
     }
 
@@ -141,7 +157,8 @@ fun ExistingTaskAppBarActions(
     IconButton(onClick = { openDialog = true }) {
         Icon(
             imageVector = Icons.Default.Delete,
-            contentDescription = stringResource(id = R.string.delete_task)
+            contentDescription = stringResource(id = R.string.delete_task),
+            tint = Custom_white
         )
     }
 
@@ -149,7 +166,8 @@ fun ExistingTaskAppBarActions(
     IconButton(onClick = { navigateToListScreen(Action.UPDATE) }) {
         Icon(
             imageVector = Icons.Default.Save,
-            contentDescription = stringResource(id = R.string.update_task)
+            contentDescription = stringResource(id = R.string.update_task),
+            tint = Custom_white
         )
     }
 }

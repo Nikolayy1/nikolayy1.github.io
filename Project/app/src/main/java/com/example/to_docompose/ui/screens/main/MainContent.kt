@@ -4,6 +4,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -39,9 +41,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.to_docompose.data.models.Stats
 import com.example.to_docompose.data.models.ToDoTask
-import com.example.to_docompose.ui.theme.Custom_beige
+import com.example.to_docompose.ui.theme.Custom_white_background
 import com.example.to_docompose.ui.theme.Custom_dark_blue
+import com.example.to_docompose.ui.theme.Custom_light_blue
 import com.example.to_docompose.ui.theme.Custom_orange
+import com.example.to_docompose.ui.theme.Custom_white
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -64,7 +68,7 @@ fun MainContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Custom_beige)
+            .background(Custom_white_background)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -187,15 +191,18 @@ fun MainContent(
                 .fillMaxWidth()
                 .weight(1.5f)
                 .padding(bottom = 8.dp)
-                .background(Custom_dark_blue)
                 .padding(8.dp)
+                .clip(MaterialTheme.shapes.medium)
+                .background(Custom_dark_blue)
         ) {
             // Quick Board Title
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.LightGray)
-                    .padding(8.dp),
+                    .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                    .background(Custom_white_background)
+                    .border(8.dp, Custom_dark_blue, MaterialTheme.shapes.medium)
+                    .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
@@ -203,13 +210,13 @@ fun MainContent(
                     text = "Quick Board",
                     fontSize = 20.sp,
                     style = MaterialTheme.typography.titleMedium,
-                    color = Color.Black
+                    color = Custom_dark_blue
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
                     imageVector = Icons.Filled.Bookmark,
                     contentDescription = "Quick Board Bookmark",
-                    tint = Color.Black
+                    tint = Custom_dark_blue
                 )
             }
 
@@ -219,7 +226,7 @@ fun MainContent(
                 Text(
                     text = "No quests marked for Quick Board.",
                     style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(vertical = 8.dp),
+                    modifier = Modifier.padding(vertical = 8.dp, horizontal = 8.dp),
                     color = Color.White
                 )
             } else {

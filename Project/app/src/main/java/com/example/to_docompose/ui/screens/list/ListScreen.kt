@@ -16,7 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.to_docompose.R
-import com.example.to_docompose.ui.theme.Custom_beige
+import com.example.to_docompose.ui.theme.Custom_white_background
 import com.example.to_docompose.ui.theme.Custom_orange
 import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
@@ -47,7 +47,7 @@ fun ListScreen(
 
 
     Scaffold(
-        modifier = Modifier.background(Custom_beige),
+        modifier = Modifier.background(Custom_white_background),
         topBar = {
             ListAppBar(
                 sharedViewModel = sharedViewModel,

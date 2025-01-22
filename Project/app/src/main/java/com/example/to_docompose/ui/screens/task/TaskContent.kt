@@ -33,7 +33,7 @@ import androidx.compose.ui.window.Dialog
 import com.example.to_docompose.R
 import com.example.to_docompose.components.PriorityDropDown
 import com.example.to_docompose.data.models.Priority
-import com.example.to_docompose.ui.theme.Custom_beige
+import com.example.to_docompose.ui.theme.Custom_white_background
 import com.example.to_docompose.ui.theme.Custom_dark_blue
 import com.example.to_docompose.ui.theme.Custom_light_blue
 import com.example.to_docompose.ui.theme.Custom_orange
@@ -85,7 +85,7 @@ fun TaskContent(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Custom_beige)
+            .background(Custom_white_background)
             .padding(all = LARGE_PADDING)
     ) {
         OutlinedTextField(
@@ -104,7 +104,7 @@ fun TaskContent(
         )
         HorizontalDivider(
             modifier = Modifier.height(MEDIUM_PADDING),
-            color = Custom_beige
+            color = Custom_white_background
         )
         PriorityDropDown(
             priority = priority,

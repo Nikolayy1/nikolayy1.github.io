@@ -27,10 +27,9 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.example.to_docompose.R
 import com.example.to_docompose.data.models.Priority
-import com.example.to_docompose.ui.theme.Custom_beige
+import com.example.to_docompose.ui.theme.Custom_white_background
 import com.example.to_docompose.ui.theme.Custom_dark_blue
 import com.example.to_docompose.ui.theme.Custom_light_blue
-import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.theme.PRIORITY_DROP_DOWN_HEIGHT
 import com.example.to_docompose.ui.theme.PRIORITY_INDICATOR_SIZE
 
@@ -53,7 +52,7 @@ fun PriorityDropDown(
             .onGloballyPositioned {
                 parentSize = it.size
             }
-            .background(Custom_beige)
+            .background(Custom_white_background)
             .height(PRIORITY_DROP_DOWN_HEIGHT)
             .clickable { expanded = true }
             .border(
@@ -93,7 +92,7 @@ fun PriorityDropDown(
         DropdownMenu(
             modifier = Modifier
                 .width(with(LocalDensity.current) { parentSize.width.toDp() })
-                .background(Custom_beige),
+                .background(Custom_white_background),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
