@@ -1,5 +1,6 @@
-# CCL3 Project - Daily Quest -- [APK Download](https://mega.nz/file/EelVUARR#DEAOLXt2UcFpowkKQ9iEmpLXlydT5PVUwuPBO_6HexQ)
-_by Niklas Hofstetter and Iosif Cicio_
+# CCL3 Project - Daily Quest
+_by Niklas Hofstetter and Iosif Cicio_ <br>
+[APK Download](https://mega.nz/file/EelVUARR#DEAOLXt2UcFpowkKQ9iEmpLXlydT5PVUwuPBO_6HexQ)
 <br>
 ## Description
 Daily Quest is a gamified task management app that transforms your daily responsibilities into an epic adventure. With features like a leveling system and a Quick Board for top-priority tasks, it keeps users motivated and productive. Inspired by RPG mechanics, Daily Quest allows users to focus on their goals while earning rewards for their accomplishments.
