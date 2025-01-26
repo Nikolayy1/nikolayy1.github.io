@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.to_docompose.R
 import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.data.models.Stats
 import com.example.to_docompose.data.models.ToDoTask
@@ -231,6 +232,31 @@ class SharedViewModel @Inject constructor(
     val stats: StateFlow<Stats> = _stats
 
     //****STATS STUFF END****
+
+
+    //+++++AVATAR STUFF+++++
+    private val _selectedAvatar = MutableStateFlow(R.drawable.pirate) // Default avatar
+    val selectedAvatar: StateFlow<Int> = _selectedAvatar
+
+    init {
+        loadSelectedAvatar()
+    }
+
+    fun saveSelectedAvatar(avatar: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreRepository.saveSelectedAvatar(avatar)
+            _selectedAvatar.value = avatar
+        }
+    }
+
+    private fun loadSelectedAvatar() {
+        viewModelScope.launch {
+            dataStoreRepository.readSelectedAvatar.collect { avatar ->
+                _selectedAvatar.value = avatar
+            }
+        }
+    }
+
 
     // Quick Board Management
     private fun updateQuickBoardTasks() {

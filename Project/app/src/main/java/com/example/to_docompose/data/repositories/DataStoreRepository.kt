@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.example.to_docompose.R
 import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.data.models.Stats
 import com.example.to_docompose.util.Constants.PREFERENCE_KEY
@@ -35,6 +36,7 @@ class DataStoreRepository @Inject constructor(
         val productivityKey = intPreferencesKey(name = "PRODUCTIVITY_KEY")
         val energyKey = intPreferencesKey(name = "ENERGY_KEY")
         val statPointsKey = intPreferencesKey(name = "STAT_POINTS_KEY")
+        val selectedAvatarKey = intPreferencesKey(name = "SELECTED_AVATAR_KEY") // Key for avatar
     }
 
     private val dataStore = context.dataStore
@@ -93,6 +95,7 @@ class DataStoreRepository @Inject constructor(
         }
     }
 
+    // Read Stats
     val readStats: Flow<Stats> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
@@ -107,5 +110,25 @@ class DataStoreRepository @Inject constructor(
             val energy = preferences[PreferenceKeys.energyKey] ?: 0
             val statPoints = preferences[PreferenceKeys.statPointsKey] ?: 0
             Stats(discipline, productivity, energy, statPoints)
+        }
+
+    // Selected Avatar Stays
+    suspend fun saveSelectedAvatar(avatar: Int) {
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.selectedAvatarKey] = avatar
+        }
+    }
+
+    // Read Selected Avatar
+    val readSelectedAvatar: Flow<Int> = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }
+        .map { preferences ->
+            preferences[PreferenceKeys.selectedAvatarKey] ?: R.drawable.pirate // Default avatar
         }
 }

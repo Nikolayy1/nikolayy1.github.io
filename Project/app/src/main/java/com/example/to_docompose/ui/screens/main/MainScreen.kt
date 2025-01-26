@@ -4,11 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
-import com.example.to_docompose.R
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 
 @Composable
@@ -24,7 +20,7 @@ fun MainScreen(
     val xpProgress by sharedViewModel.progressBar.collectAsState()
     val quickBoardTasks = sharedViewModel.quickBoardTasks.collectAsState().value
     val stats by sharedViewModel.stats.collectAsState()
-    var selectedAvatar by remember { mutableIntStateOf(R.drawable.pirate) }
+    val selectedAvatar by sharedViewModel.selectedAvatar.collectAsState()
 
 
     /// onStatUpgrade callback
@@ -45,7 +41,7 @@ fun MainScreen(
         stats = stats,
         onStatUpgrade = { statName -> sharedViewModel.upgradeStat(statName) },
         selectedAvatar = selectedAvatar,
-        onAvatarChange = { newAvatar -> selectedAvatar = newAvatar },
+        onAvatarChange = { avatar -> sharedViewModel.saveSelectedAvatar(avatar) },
         navigateToTaskScreen = { taskId -> navController.navigate("task_screen/$taskId")
         }
     )

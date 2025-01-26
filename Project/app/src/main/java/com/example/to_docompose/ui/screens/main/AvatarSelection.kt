@@ -38,18 +38,15 @@ fun AvatarSelectionDialog(
         R.drawable.turban
     )
 
-
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("Select Your Avatar") },
         text = {
             LazyVerticalGrid(
-                columns = GridCells.Fixed(3), // 3 items per row
+                columns = GridCells.Fixed(3),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier
-                    .padding(8.dp)
-                    .height(200.dp) // Adjust height as needed
+                modifier = Modifier.padding(8.dp).height(200.dp)
             ) {
                 items(avatars) { avatar ->
                     Image(
@@ -58,9 +55,7 @@ fun AvatarSelectionDialog(
                         modifier = Modifier
                             .size(80.dp)
                             .clip(RoundedCornerShape(40.dp))
-                            .clickable {
-                                onAvatarSelected(avatar)
-                            }
+                            .clickable { onAvatarSelected(avatar) } // Select avatar
                     )
                 }
             }
@@ -72,4 +67,5 @@ fun AvatarSelectionDialog(
         }
     )
 }
+
 
