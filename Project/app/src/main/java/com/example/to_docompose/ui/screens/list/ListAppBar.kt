@@ -48,6 +48,10 @@ import com.example.to_docompose.ui.viewmodels.SharedViewModel
 import com.example.to_docompose.util.Action
 import com.example.to_docompose.util.SearchAppBarState
 
+/**
+ * Composable top app bar for List view
+ */
+
 @Composable
 fun ListAppBar(
     sharedViewModel: SharedViewModel,

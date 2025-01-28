@@ -14,6 +14,10 @@ import com.example.to_docompose.data.models.Priority
 import com.example.to_docompose.ui.theme.LARGE_PADDING
 import com.example.to_docompose.ui.theme.PRIORITY_INDICATOR_SIZE
 
+/**
+ * Component for singular Priority Item of Dropdown list
+ */
+
 @Composable
 fun PriorityItem(priority: Priority) {
     Row(

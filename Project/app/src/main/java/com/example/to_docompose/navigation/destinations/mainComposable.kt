@@ -7,6 +7,10 @@ import com.example.to_docompose.navigation.Screen
 import com.example.to_docompose.ui.screens.main.MainScreen
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 
+/**
+ * Composable route for main screen (MainScreen is entry point)
+ */
+
 fun NavGraphBuilder.mainComposable(
     navigateToListScreen: () -> Unit,
     sharedViewModel: SharedViewModel,

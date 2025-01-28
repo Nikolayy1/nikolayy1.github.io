@@ -19,6 +19,10 @@ import androidx.compose.ui.unit.dp
 import com.example.to_docompose.R
 import com.example.to_docompose.ui.theme.Custom_white_background
 
+/**
+ * Composable for empty content on list view
+ */
+
 @Composable
 fun DisplayEmptyContent() {
     Column(

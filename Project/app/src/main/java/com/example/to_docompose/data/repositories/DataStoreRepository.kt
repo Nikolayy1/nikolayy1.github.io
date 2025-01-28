@@ -21,6 +21,11 @@ import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
 
+/**
+ * Repository class for managing DataStore (Experience, stats, avatar)
+ */
+
+
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERENCE_NAME)
 
 @ViewModelScoped

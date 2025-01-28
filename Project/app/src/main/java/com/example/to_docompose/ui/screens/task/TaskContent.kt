@@ -41,6 +41,10 @@ import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.theme.LARGE_PADDING
 import com.example.to_docompose.ui.theme.MEDIUM_PADDING
 
+/**
+ * Composable Quest Content (Details of Quest + Edit/Complete/...)
+ */
+
 @Composable
 fun TaskContent(
     modifier: Modifier = Modifier,

@@ -12,7 +12,7 @@ data class ToDoTask(
     val title: String,
     val description: String,
     val priority: Priority,
-    @ColumnInfo(defaultValue = "0") // Adding default value
+    @ColumnInfo(defaultValue = "0") // 0 is default Value
     val isCompleted: Boolean = false,
     val isQuickBoard: Boolean = false
 )

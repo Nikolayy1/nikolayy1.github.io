@@ -26,13 +26,17 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel for everything
+ */
+
 @HiltViewModel
 class SharedViewModel @Inject constructor(
     private val repository: ToDoRepository,
     private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
-    // XP and Level Attributes
+    // XP and Level
     private val _currentXP = MutableStateFlow(0)
     val currentXP: StateFlow<Int> = _currentXP
 
@@ -108,7 +112,6 @@ class SharedViewModel @Inject constructor(
 
     private var expPointsEarned by mutableIntStateOf(0)
 
-    // Initialization
     init {
         getAllTasks()
         updateQuickBoardTasks()
@@ -129,12 +132,14 @@ class SharedViewModel @Inject constructor(
         }
     }
 
+    // Save XP and Level
     private fun saveXPAndLevel() {
         viewModelScope.launch(Dispatchers.IO) {
             dataStoreRepository.saveXPAndLevel(_currentXP.value, _currentLevel.value)
         }
     }
 
+    // Complete Quest
     fun completeTask(task: ToDoTask) {
         val xpGained = when (task.priority) {
             Priority.LOW -> 1
@@ -154,6 +159,7 @@ class SharedViewModel @Inject constructor(
                 statPoints = _stats.value.statPoints + 1
             )
         }
+
         // Save updates
         updateProgressBar()
         saveXPAndLevel()

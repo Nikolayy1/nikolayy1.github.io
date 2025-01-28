@@ -5,6 +5,10 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import com.example.to_docompose.data.models.ToDoTask
 
+/**
+ *  Database for Quests
+ */
+
 @Database(
     entities = [ToDoTask::class],
     version = 3, // Incremented version

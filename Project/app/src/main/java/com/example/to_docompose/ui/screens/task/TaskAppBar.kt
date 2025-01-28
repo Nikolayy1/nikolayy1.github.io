@@ -14,7 +14,6 @@ import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -31,6 +30,10 @@ import com.example.to_docompose.ui.theme.Custom_dark_blue
 import com.example.to_docompose.ui.theme.Custom_light_blue
 import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.util.Action
+
+/**
+ * Composable top app bar for single quest screen
+ */
 
 @Composable
 fun TaskAppBar(

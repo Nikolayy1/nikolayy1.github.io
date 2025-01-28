@@ -33,6 +33,10 @@ import com.example.to_docompose.ui.theme.Custom_light_blue
 import com.example.to_docompose.ui.theme.PRIORITY_DROP_DOWN_HEIGHT
 import com.example.to_docompose.ui.theme.PRIORITY_INDICATOR_SIZE
 
+/**
+ * Component for Dropdown selection of Priority of a Quest
+ */
+
 @Composable
 fun PriorityDropDown(
     priority: Priority,

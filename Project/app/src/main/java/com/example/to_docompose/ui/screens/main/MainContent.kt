@@ -33,7 +33,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -43,9 +42,11 @@ import com.example.to_docompose.data.models.Stats
 import com.example.to_docompose.data.models.ToDoTask
 import com.example.to_docompose.ui.theme.Custom_white_background
 import com.example.to_docompose.ui.theme.Custom_dark_blue
-import com.example.to_docompose.ui.theme.Custom_light_blue
 import com.example.to_docompose.ui.theme.Custom_orange
-import com.example.to_docompose.ui.theme.Custom_white
+
+/**
+ * Main content view (Title, stats, avatar, Quick Board, List button)
+ */
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

@@ -16,6 +16,10 @@ import com.example.to_docompose.data.models.ToDoTask
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 import com.example.to_docompose.util.Action
 
+/**
+ * Composable quest screen (Top app bar + Content)
+ */
+
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun TaskScreen(

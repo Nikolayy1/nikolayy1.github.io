@@ -21,6 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.to_docompose.data.models.Stats
 
+/**
+ * Composable stats element
+ */
+
 @Composable
 fun Stats(
     stats: Stats,

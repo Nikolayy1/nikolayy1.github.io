@@ -10,6 +10,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.res.stringResource
 import com.example.to_docompose.R
 
+/**
+ * Component for displaying information to user as an
+ * Alert Dialog with Title and Message
+ */
+
+
 @Composable
 fun DisplayAlertDialog(
     title: String,

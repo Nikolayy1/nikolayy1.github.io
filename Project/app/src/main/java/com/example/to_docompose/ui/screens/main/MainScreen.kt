@@ -7,6 +7,10 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 
+/**
+ * Composable Main screen
+ */
+
 @Composable
 fun MainScreen(
     navigateToListScreen: () -> Unit,

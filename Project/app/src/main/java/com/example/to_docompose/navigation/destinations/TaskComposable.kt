@@ -1,8 +1,6 @@
 package com.example.to_docompose.navigation.destinations
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -13,6 +11,10 @@ import com.example.to_docompose.navigation.Screen
 import com.example.to_docompose.ui.screens.task.TaskScreen
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 import com.example.to_docompose.util.Action
+
+/**
+ * Composable route for single quest view (TaskScreen is entry point)
+ */
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.taskComposable(

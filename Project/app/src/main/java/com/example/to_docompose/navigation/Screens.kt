@@ -4,6 +4,10 @@ package com.example.to_docompose.navigation
 
 import com.example.to_docompose.util.Action
 
+/**
+ * Screen Route names
+ */
+
 sealed class Screen(val route: String) {
     object Main : Screen("main")
     object List : Screen("list/{action}") {

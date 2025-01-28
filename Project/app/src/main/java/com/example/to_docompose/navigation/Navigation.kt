@@ -10,6 +10,10 @@ import com.example.to_docompose.navigation.destinations.taskComposable
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 import com.example.to_docompose.util.Action
 
+/**
+ * NavHost with navigation to all the composable screens
+ */
+
 @ExperimentalAnimationApi
 @Composable
 fun SetupNavigation(

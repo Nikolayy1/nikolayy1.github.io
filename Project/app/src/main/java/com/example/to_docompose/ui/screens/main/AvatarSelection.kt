@@ -20,6 +20,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.to_docompose.R
 
+/**
+ * Composable for Avatar Selection
+ */
+
 @Composable
 fun AvatarSelectionDialog(
     selectedAvatar: Int,

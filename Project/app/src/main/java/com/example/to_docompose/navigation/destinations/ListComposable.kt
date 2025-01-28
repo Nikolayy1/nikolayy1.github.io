@@ -14,6 +14,10 @@ import com.example.to_docompose.ui.screens.list.ListScreen
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 import com.example.to_docompose.util.Action
 
+/**
+ * Composable route for List View (List Screen is entry point)
+ */
+
 @ExperimentalAnimationApi
 fun NavGraphBuilder.listComposable(
     navigateToTaskScreen: (taskId: Int) -> Unit,

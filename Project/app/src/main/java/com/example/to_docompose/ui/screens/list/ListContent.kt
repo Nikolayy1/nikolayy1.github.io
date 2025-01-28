@@ -32,6 +32,10 @@ import com.example.to_docompose.ui.theme.PRIORITY_INDICATOR_SIZE
 import com.example.to_docompose.util.RequestState
 import com.example.to_docompose.util.SearchAppBarState
 
+/**
+ * Content of List screen (List with all the Quests)
+ */
+
 @ExperimentalAnimationApi
 @Composable
 fun ListContent(

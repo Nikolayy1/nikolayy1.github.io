@@ -1,6 +1,5 @@
 package com.example.to_docompose.ui.screens.main
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,9 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.to_docompose.data.models.ToDoTask
 import com.example.to_docompose.ui.theme.Custom_dark_blue
-import com.example.to_docompose.ui.theme.Custom_light_blue
-import com.example.to_docompose.ui.theme.Custom_white
 import com.example.to_docompose.ui.theme.Custom_white_background
+
+/**
+ * Composable Quick board and Quick board Item
+ */
 
 @Composable
 fun QuickBoard(
