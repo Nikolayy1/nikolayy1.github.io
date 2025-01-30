@@ -6,6 +6,10 @@ _by Niklas Hofstetter and Iosif Cicio_ <br>
 Daily Quest is a gamified task management app that transforms your daily responsibilities into an epic adventure. With features like a leveling system and a Quick Board for top-priority tasks, it keeps users motivated and productive. Inspired by RPG mechanics, Daily Quest allows users to focus on their goals while earning rewards for their accomplishments.
 <br>
 ## App Concept
+### Database
+We used a Room database to store our Quests and Datastore to store the Experience points of the user, stats and avatar choice. 
+<br>
+
 ### Use Case
 Daily Quest is designed for individuals who want to stay productive while having fun. It provides a visual and interactive way to manage tasks by incorporating gamification elements like experience points, levels, and a task prioritization system. 
 Users can:
@@ -107,3 +111,50 @@ How well do users understand the visual hierarchy of task categories (Low, Mediu
 - Microsoft Forms
 
 Link to Forms: https://forms.office.com/e/1DtAKgYDsM
+
+### Results
+We tested 5 people, 3 in person and 2 online. The results were quite good and very helpful. These are the key results:<br>
+
+<b>Strengths:</b>
+<br>
+- The app is user-friendly, with tasks rated highly (6-7) for ease of use.
+- Minimalistic design and intuitive navigation were well-received.
+- Gamification elements effectively motivated task completion and increased engagement.
+
+<br>
+
+<b>Challenges:</b>
+<br>
+- Some users found the Quickboard feature unclear.
+- A desire for more features, such as quests, mini-games, and notifications, was expressed.
+
+<br>
+
+<b>Overall Sentiment:</b>
+<br>
+- Users found the app productive and engaging, with potential for regular use if improvements are implemented.
+
+<br>
+
+![SEQ Ratings](https://github.com/user-attachments/assets/16251d29-a769-4d4b-b640-d8b68b8a22df)
+<br>
+The chart shows the average SEQ Score per task.
+
+## Final Reflection
+### Improvements
+After testing and presenting our app we decided to fix the occuring bugs and improve the app. In our initial concept there was no Avatar selection planned, so this is a feature we added at the end to make the app feel a bit more fun to use. However, at the final presentation we noticed that there was an issue with saving the selected Avatar after switching screens. We solved this by also storing the avatar using DataStore. <br>
+There could be more things to improve, but the general concept and idea of our app was successfully implemeneted. Further features could be: <br>
+- Making sure user cant turn the phone sideways, so the input value doesn't get reset
+- Different color schemes for dark mode and light mode
+- Enhance Quickboard usability with tutorials or tooltips
+- Integrate notification system
+- Expand gamification with additional interactive features
+<br>
+
+### Niklas
+My main task in this project was to create and implement the UI. At the beginning I had some trouble figuring out the best way to implement and change colors and fonts but after some time it was quite easy. I had a very nice learning experience regarding UI, Kotlin and version control using github as a team. I think our initial concept was quite good, but we decided to change some things while developing, like the color scheme. Designing and performing the usability test was also a quite smooth process, since me and Iosif already worked together in UEE and knew how we should approach it. In the end I think this was a good project to further improve design, mobile development and user testing skills. 
+
+<br>
+### Iosif
+
+
