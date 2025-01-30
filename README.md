@@ -155,6 +155,7 @@ There could be more things to improve, but the general concept and idea of our a
 My main task in this project was to create and implement the UI. At the beginning I had some trouble figuring out the best way to implement and change colors and fonts but after some time it was quite easy. I had a very nice learning experience regarding UI, Kotlin and version control using github as a team. I think our initial concept was quite good, but we decided to change some things while developing, like the color scheme. Designing and performing the usability test was also a quite smooth process, since me and Iosif already worked together in UEE and knew how we should approach it. In the end I think this was a good project to further improve design, mobile development and user testing skills. 
 
 <br>
+
 ### Iosif
 First and foremost, I worked on developing the main screen of our project, which included the experience (EXP) system, quickboard feature, leveling mechanics, avatar selection, and stat allocation. I also worked closely with Niklas on refining UI interactions and debugging. Throughout the project, I reinforced my knowledge regarding version control, particularly working with GitHub in a team. Seeing our usability tests confirm that the gamification elements indeed increased the motivation of users was rewarding. Overall, this project helped me deepen my skills in Kotlin, Jetpack Compose, and UX testing while successfully bringing our concept to life. 
 
