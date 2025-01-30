@@ -156,5 +156,6 @@ My main task in this project was to create and implement the UI. At the beginnin
 
 <br>
 ### Iosif
+First and foremost, I worked on developing the main screen of our project, which included the experience (EXP) system, quickboard feature, leveling mechanics, avatar selection, and stat allocation. I also worked closely with Niklas on refining UI interactions and debugging. Throughout the project, I reinforced my knowledge regarding version control, particularly working with GitHub in a team. Seeing our usability tests confirm that the gamification elements indeed increased the motivation of users was rewarding. Overall, this project helped me deepen my skills in Kotlin, Jetpack Compose, and UX testing while successfully bringing our concept to life. 
 
 
